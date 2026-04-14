@@ -124,27 +124,52 @@ const CalEmbed = () => {
   const [loaded, setLoaded] = useState(false);
 
   useEffect(() => {
-    const script = document.createElement("script");
-    script.src = "https://app.cal.com/embed/embed.js";
-    script.async = true;
-    script.onload = () => {
-      if (window.Cal) {
-        window.Cal("init", "manty-workshop", { origin: "https://cal.com" });
-        window.Cal.ns["manty-workshop"]("inline", {
-          elementOrSelector: "#cal-inline-embed",
-          calLink: "nomadkuche/manty-workshop",
-          layout: "month_view",
-          config: { layout: "month_view" },
-        });
-        window.Cal.ns["manty-workshop"]("ui", {
-          hideEventTypeDetails: false,
-          layout: "month_view",
-        });
-        setLoaded(true);
-      }
-    };
-    document.head.appendChild(script);
-    return () => { try { document.head.removeChild(script); } catch (e) {} };
+    // Cal.com requires a loader stub to be defined before the script loads.
+    // This queues commands so the script can process them on ready.
+    (function (C, A, L) {
+      const p = (a, ar) => a.q.push(ar);
+      const d = C.document;
+      C.Cal = C.Cal || function () {
+        const cal = C.Cal;
+        const ar = arguments;
+        if (!cal.loaded) {
+          cal.ns = {};
+          cal.q = cal.q || [];
+          const s = d.createElement("script");
+          s.src = A;
+          s.async = true;
+          s.onload = () => setLoaded(true);
+          d.head.appendChild(s);
+          cal.loaded = true;
+        }
+        if (ar[0] === L) {
+          const api = function () { p(api, arguments); };
+          const namespace = ar[1];
+          api.q = api.q || [];
+          if (typeof namespace === "string") {
+            cal.ns[namespace] = cal.ns[namespace] || api;
+            p(cal.ns[namespace], ar);
+            p(cal, [L, namespace, api]);
+          } else {
+            p(cal, ar);
+          }
+          return;
+        }
+        p(cal, ar);
+      };
+    })(window, "https://app.cal.com/embed/embed.js", "init");
+
+    window.Cal("init", "manty-workshop", { origin: "https://cal.com" });
+    window.Cal.ns["manty-workshop"]("inline", {
+      elementOrSelector: "#cal-inline-embed",
+      calLink: "nomadkuche/manty-workshop",
+      layout: "month_view",
+      config: { layout: "month_view" },
+    });
+    window.Cal.ns["manty-workshop"]("ui", {
+      hideEventTypeDetails: false,
+      layout: "month_view",
+    });
   }, []);
 
   return (

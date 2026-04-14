@@ -204,124 +204,6 @@ const CalEmbed = () => {
   );
 };
 
-/* ─── Contact / Inquiry Form ─── */
-const ContactForm = () => {
-  const [tab, setTab] = useState("workshop");
-  const [submitted, setSubmitted] = useState(false);
-  const [form, setForm] = useState({ name: "", email: "", guests: "", date: "", message: "" });
-
-  const tabs = [
-    { key: "workshop", label: "Workshop" },
-    { key: "private", label: "Private Event" },
-    { key: "collab", label: "Collaboration" },
-    { key: "other", label: "Other" },
-  ];
-
-  const config = {
-    workshop: {
-      name: "Your name", email: "you@example.com", guests: "Number of guests",
-      message: "Any dietary restrictions, preferences, or questions?",
-      showGuests: true, showDate: true,
-    },
-    private: {
-      name: "Your name", email: "you@example.com", guests: "Estimated guest count",
-      message: "Tell us about your event — occasion, preferred date, dietary needs…",
-      showGuests: true, showDate: true,
-    },
-    collab: {
-      name: "Your name / Studio name", email: "studio@example.com", guests: "",
-      message: "What kind of collaboration do you have in mind? Pop-up, workshop series, menu development…",
-      showGuests: false, showDate: false,
-    },
-    other: {
-      name: "Your name", email: "you@example.com", guests: "",
-      message: "Ask us anything — we'd love to hear from you.",
-      showGuests: false, showDate: false,
-    },
-  };
-
-  const c = config[tab];
-  const handleChange = (k) => (e) => setForm((f) => ({ ...f, [k]: e.target.value }));
-  const canSubmit = form.name && form.email && form.message;
-
-  if (submitted) {
-    return (
-      <div style={{ textAlign: "center", padding: "48px 0" }}>
-        <div style={{ fontSize: 36, marginBottom: 14, color: T.gold }}>✦</div>
-        <p style={{ fontFamily: "'EB Garamond', serif", fontSize: 24, color: T.textLight, margin: "0 0 8px" }}>Thank you</p>
-        <p style={{ fontFamily: "'Karla', sans-serif", fontSize: 14, color: T.warmGrayLight, lineHeight: 1.6 }}>
-          We received your message and will get back to you soon.
-        </p>
-        <button onClick={() => { setSubmitted(false); setForm({ name: "", email: "", guests: "", date: "", message: "" }); }} style={{
-          marginTop: 24, padding: "10px 28px", border: `1px solid rgba(196,147,63,0.3)`,
-          borderRadius: 6, background: "transparent", color: T.gold,
-          fontFamily: "'Karla', sans-serif", fontSize: 13, cursor: "pointer",
-        }}>Send another</button>
-      </div>
-    );
-  }
-
-  const inputStyle = {
-    width: "100%", padding: "12px 16px", border: `1px solid rgba(196,147,63,0.15)`,
-    borderRadius: 6, background: "rgba(255,255,255,0.05)", color: T.textLight,
-    fontFamily: "'Karla', sans-serif", fontSize: 14, outline: "none",
-    boxSizing: "border-box", transition: "border-color .2s",
-  };
-
-  return (
-    <div>
-      <div style={{
-        display: "flex", gap: 0, marginBottom: 28,
-        borderBottom: `1px solid rgba(196,147,63,0.15)`,
-        flexWrap: "wrap",
-      }}>
-        {tabs.map((t) => (
-          <button key={t.key} onClick={() => { setTab(t.key); setForm({ name: "", email: "", guests: "", date: "", message: "" }); }} style={{
-            flex: "1 1 auto", padding: "12px 12px", border: "none", background: "none",
-            fontFamily: "'Karla', sans-serif", fontSize: 12, fontWeight: 600,
-            textTransform: "uppercase", letterSpacing: "0.06em", cursor: "pointer",
-            color: tab === t.key ? T.gold : T.warmGrayLight,
-            borderBottom: tab === t.key ? `2px solid ${T.gold}` : "2px solid transparent",
-            transition: "all .2s", whiteSpace: "nowrap",
-          }}>{t.label}</button>
-        ))}
-      </div>
-
-      <div style={{ display: "flex", gap: 14, marginBottom: 14, flexWrap: "wrap" }}>
-        <input type="text" value={form.name} onChange={handleChange("name")}
-          placeholder={c.name} style={{ ...inputStyle, flex: "1 1 180px" }} />
-        <input type="email" value={form.email} onChange={handleChange("email")}
-          placeholder={c.email} style={{ ...inputStyle, flex: "1 1 180px" }} />
-      </div>
-
-      {(c.showGuests || c.showDate) && (
-        <div style={{ display: "flex", gap: 14, marginBottom: 14, flexWrap: "wrap" }}>
-          {c.showGuests && (
-            <input type="number" min="1" max="30" value={form.guests} onChange={handleChange("guests")}
-              placeholder={c.guests} style={{ ...inputStyle, flex: "1 1 140px" }} />
-          )}
-          {c.showDate && (
-            <input type="date" value={form.date} onChange={handleChange("date")}
-              style={{ ...inputStyle, flex: "1 1 160px" }} />
-          )}
-        </div>
-      )}
-
-      <textarea value={form.message} onChange={handleChange("message")}
-        placeholder={c.message} rows={4} style={{
-          ...inputStyle, resize: "vertical", marginBottom: 20,
-        }} />
-
-      <button onClick={() => setSubmitted(true)} disabled={!canSubmit} style={{
-        padding: "14px 40px", border: `1px solid ${T.gold}`, borderRadius: 6,
-        background: "transparent", color: T.gold, fontFamily: "'Karla', sans-serif",
-        fontSize: 14, fontWeight: 600, letterSpacing: "0.08em", textTransform: "uppercase",
-        cursor: canSubmit ? "pointer" : "default",
-        opacity: canSubmit ? 1 : 0.4, transition: "all .2s",
-      }}>Send Inquiry</button>
-    </div>
-  );
-};
 
 /* ─── Image Placeholder ─── */
 const ImgPlaceholder = ({ aspect = "4/3", gradient = `linear-gradient(135deg, ${T.ivoryDark}, ${T.warmGrayLight})`, borderRadius = 8, style = {} }) => (
@@ -733,24 +615,19 @@ export default function NomadKuche() {
       <section id="contact" style={{ background: T.darkMid, position: "relative", overflow: "hidden" }}>
         <div style={{ position: "absolute", bottom: 40, right: "8%", pointerEvents: "none" }}><SpiralSun size={100} opacity={0.03} color={T.gold} /></div>
         <div style={sectionPad}>
-          <div style={{ display: "flex", gap: 60, flexWrap: "wrap", alignItems: "flex-start" }}>
-            <FadeIn style={{ flex: "1 1 320px", minWidth: 280 }}>
-              <p style={{ fontFamily: "'Karla', sans-serif", fontSize: 12, fontWeight: 600, color: T.gold, letterSpacing: "0.15em", textTransform: "uppercase", marginBottom: 16 }}>Contact</p>
-              <h2 style={{ ...headingStyle(T.ivory), marginBottom: 20 }}>Start a<br />Conversation</h2>
-              <p style={{ ...subStyle(T.warmGrayLight), marginBottom: 32 }}>Whether you're inquiring about a workshop, planning a private event, or exploring a partnership — we'd love to hear from you.</p>
-              <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
-                <a href="mailto:hello@nomadkuche.com" style={{ fontFamily: "'Karla', sans-serif", fontSize: 15, color: T.gold, textDecoration: "none", display: "flex", alignItems: "center", gap: 10 }}>
-                  <span style={{ fontSize: 18 }}>✉</span> hello@nomadkuche.com
-                </a>
-                <a href="https://instagram.com/nomadkuche" target="_blank" rel="noopener" style={{ fontFamily: "'Karla', sans-serif", fontSize: 15, color: T.gold, textDecoration: "none", display: "flex", alignItems: "center", gap: 10 }}>
-                  <span style={{ fontSize: 18 }}>◎</span> @nomadkuche
-                </a>
-              </div>
-            </FadeIn>
-            <FadeIn delay={0.15} style={{ flex: "1 1 420px", minWidth: 300 }}>
-              <ContactForm />
-            </FadeIn>
-          </div>
+          <FadeIn>
+            <p style={{ fontFamily: "'Karla', sans-serif", fontSize: 12, fontWeight: 600, color: T.gold, letterSpacing: "0.15em", textTransform: "uppercase", marginBottom: 16 }}>Contact</p>
+            <h2 style={{ ...headingStyle(T.ivory), marginBottom: 20 }}>Start a<br />Conversation</h2>
+            <p style={{ ...subStyle(T.warmGrayLight), marginBottom: 32 }}>Whether you're inquiring about a workshop, planning a private event, or exploring a partnership — we'd love to hear from you.</p>
+            <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
+              <a href="mailto:hello@nomadkuche.com" style={{ fontFamily: "'Karla', sans-serif", fontSize: 15, color: T.gold, textDecoration: "none", display: "flex", alignItems: "center", gap: 10 }}>
+                <span style={{ fontSize: 18 }}>✉</span> hello@nomadkuche.com
+              </a>
+              <a href="https://instagram.com/nomadkuche" target="_blank" rel="noopener" style={{ fontFamily: "'Karla', sans-serif", fontSize: 15, color: T.gold, textDecoration: "none", display: "flex", alignItems: "center", gap: 10 }}>
+                <span style={{ fontSize: 18 }}>◎</span> @nomadkuche
+              </a>
+            </div>
+          </FadeIn>
         </div>
       </section>
 

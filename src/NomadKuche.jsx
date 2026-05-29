@@ -576,7 +576,37 @@ export default function NomadKuche() {
               <img src="/gallery_4.jpg" alt="Gallery 4" style={{ width: "100%", aspectRatio: "21/9", objectFit: "cover", borderRadius: 10, display: "block" }} />
             </FadeIn>
           </div>
-          <style>{`@media (max-width: 640px) { #gallery [style*="grid-template-columns"] { grid-template-columns: 1fr 1fr !important; } }`}</style>
+          <style>{`
+            @media (max-width: 640px) {
+              #gallery [style*="grid-template-columns"] {
+                grid-template-columns: 1fr 1fr !important;
+                grid-template-rows: unset !important;
+              }
+              #gallery [style*="grid-template-columns"] > *:nth-child(1) {
+                grid-column: 1 / 3 !important;
+                grid-row: auto !important;
+              }
+              #gallery [style*="grid-template-columns"] > *:nth-child(1) img {
+                height: auto !important;
+                aspect-ratio: 4/3 !important;
+              }
+              #gallery [style*="grid-template-columns"] > *:nth-child(2) {
+                grid-column: 1 / 2 !important;
+                grid-row: auto !important;
+              }
+              #gallery [style*="grid-template-columns"] > *:nth-child(3) {
+                grid-column: 2 / 3 !important;
+                grid-row: auto !important;
+              }
+              #gallery [style*="grid-template-columns"] > *:nth-child(4) {
+                grid-column: 1 / 3 !important;
+                grid-row: auto !important;
+              }
+              #gallery [style*="grid-template-columns"] > *:nth-child(4) img {
+                aspect-ratio: 16/9 !important;
+              }
+            }
+          `}</style>
         </div>
       </section>
 

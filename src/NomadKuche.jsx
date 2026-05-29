@@ -534,7 +534,7 @@ export default function NomadKuche() {
             <Divider color={T.crimson} opacity={0.2} width={120} />
             <div style={{ height: 28 }} />
             <h2 style={{ ...headingStyle(), textAlign: "center" }}>Reserve a Spot</h2>
-            <p style={{ ...subStyle(), margin: "0 auto 8px" }}>Choose a date and time that works for you. You'll receive a confirmation email with everything you need.</p>
+            <p style={{ ...subStyle(), margin: "0 auto 8px" }}>Choose a date and time that works for you. You'll receive a confirmation email with everything you need. After your reservation, we'll contact you with payment details to confirm your place.</p>
             <p style={{ fontFamily: "'Karla', sans-serif", fontSize: 13, color: T.warmGrayLight, margin: "0 auto" }}>
               For private events or other inquiries, use the{" "}
               <span onClick={() => scrollTo("contact")} style={{ color: T.crimson, cursor: "pointer", textDecoration: "underline", textUnderlineOffset: 3 }}>contact form</span> below.

@@ -376,7 +376,7 @@ export default function NomadKuche() {
           <p style={{
             fontFamily: "'Karla', sans-serif", fontSize: 17, color: T.warmGrayLight,
             lineHeight: 1.7, maxWidth: 480, margin: "0 auto 44px", fontWeight: 300,
-          }}>Intimate manty workshops and culinary experiences that bring the warmth of the Silk Road to Vienna's heart.</p>
+          }}>Intimate cooking workshops, pop-up dinners and shared table experiences.</p>
           <div style={{ display: "flex", gap: 16, justifyContent: "center", flexWrap: "wrap" }}>
             <button onClick={() => scrollTo("reserve")} style={btnPrimary}>Reserve a Spot</button>
             <button onClick={() => scrollTo("about")} style={btnOutline(T.warmGrayLight)}>Discover</button>
@@ -406,7 +406,7 @@ export default function NomadKuche() {
             <p style={{ ...subStyle(), marginBottom: 0 }}>Nomad Küche continues this feeling in Vienna: through handmade dishes, warm tea, stories and shared tables that bring people closer to Central Asian culture.</p>
           </FadeIn>
           <FadeIn delay={0.15} style={{ flex: "1 1 360px", minWidth: 280 }}>
-            <ImgPlaceholder aspect="3/4" gradient={`linear-gradient(160deg, ${T.crimson}22, ${T.gold}33, ${T.ivoryDark})`} borderRadius={10} />
+            <img src="/about_photo.jpg" alt="Nomad Küche story" style={{ width: "100%", aspectRatio: "3/4", objectFit: "cover", borderRadius: 10, display: "block" }} />
           </FadeIn>
         </div>
       </section>

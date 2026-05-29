@@ -480,19 +480,19 @@ export default function NomadKuche() {
           <FadeIn style={{ textAlign: "center", marginBottom: 60 }}>
             <Divider color={T.gold} opacity={0.25} width={120} />
             <div style={{ height: 28 }} />
-            <p style={{ fontFamily: "'Karla', sans-serif", fontSize: 12, fontWeight: 600, color: T.gold, letterSpacing: "0.15em", textTransform: "uppercase", marginBottom: 16 }}>Signature Experience</p>
+            <p style={{ fontFamily: "'Karla', sans-serif", fontSize: 12, fontWeight: 600, color: T.gold, letterSpacing: "0.15em", textTransform: "uppercase", marginBottom: 16 }}>What to expect</p>
             <h2 style={{ ...headingStyle(T.ivory), textAlign: "center" }}>The Manty Workshop</h2>
-            <p style={{ ...subStyle(T.warmGrayLight), margin: "0 auto" }}>A 3–4 hour journey from raw ingredients to a shared feast</p>
+            <p style={{ ...subStyle(T.warmGrayLight), margin: "0 auto" }}>A hands-on Central Asian cooking experience from dough to shared table</p>
           </FadeIn>
 
           <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))", gap: 20, marginBottom: 56 }}>
             {[
-              { num: "01", title: "Welcome & Tea", desc: "Arrive to the aroma of fresh green tea and warm bread. We set the mood and share the story behind manty." },
-              { num: "02", title: "The Dough", desc: "Learn the feel of the perfect dough — elastic, smooth, rested. You'll make it with your own hands." },
-              { num: "03", title: "The Filling", desc: "Prepare a fragrant mix of spiced lamb, onion, and cumin — the heart of every manty." },
-              { num: "04", title: "The Fold", desc: "Master the traditional pleating technique. This is where craft meets art — each fold a small meditation." },
-              { num: "05", title: "The Steam", desc: "Place your manty in the cascane and let the steam do its work. Time to talk, breathe, connect." },
-              { num: "06", title: "The Feast", desc: "Sit down together and eat what you've made — with sides, sauces, salads, and stories." },
+              { num: "01", title: "Welcome & Drinks", desc: "We begin with a warm welcome, coffee/tea/soda (herbal mountain tea) and a short story about manty and Central Asian table culture." },
+              { num: "02", title: "The Dough", desc: "You'll learn how to make and roll the dough by hand — soft, simple and beginner-friendly." },
+              { num: "03", title: "The Filling", desc: "Together we'll prepare the filling, with a vegan option included, and learn what makes manty so comforting and full of flavour." },
+              { num: "04", title: "The Shapes", desc: "You'll learn different manty shapes - from simple folds to more traditional styles." },
+              { num: "05", title: "Sauces & Steam", desc: "We'll make two homemade sauces, steam the manty and prepare the table while everything comes together." },
+              { num: "06", title: "The Shared Table", desc: "At the end, we'll gather around the table and enjoy our freshly steamed manty with sauces, seasonal sides and herbal mountain tea. " },
             ].map((s, i) => (
               <FadeIn key={i} delay={i * 0.08}>
                 <div style={{ padding: "28px 24px", borderRadius: 8, border: `1px solid rgba(196,147,63,0.1)`, background: "rgba(196,147,63,0.03)" }}>
@@ -510,7 +510,7 @@ export default function NomadKuche() {
               marginBottom: 44, padding: "32px 0",
               borderTop: `1px solid rgba(196,147,63,0.1)`, borderBottom: `1px solid rgba(196,147,63,0.1)`,
             }}>
-              {[{ value: "6–8", label: "Guests" }, { value: "3–4h", label: "Duration" }, { value: "100%", label: "Handmade" }].map((m, i) => (
+              {[{ value: "12–15", label: "Guests" }, { value: "2–3h", label: "Duration" }, { value: "100%", label: "Handmade" }].map((m, i) => (
                 <div key={i} style={{ textAlign: "center" }}>
                   <div style={{ fontFamily: "'EB Garamond', serif", fontSize: 36, fontWeight: 400, color: T.gold, lineHeight: 1 }}>{m.value}</div>
                   <div style={{ fontFamily: "'Karla', sans-serif", fontSize: 12, fontWeight: 500, color: T.warmGrayLight, letterSpacing: "0.1em", textTransform: "uppercase", marginTop: 6 }}>{m.label}</div>
@@ -590,9 +590,11 @@ export default function NomadKuche() {
           <FadeIn delay={0.15} style={{ flex: "1 1 440px", minWidth: 300 }}>
             <p style={{ fontFamily: "'Karla', sans-serif", fontSize: 12, fontWeight: 600, color: T.crimson, letterSpacing: "0.15em", textTransform: "uppercase", marginBottom: 16 }}>The Founder</p>
             <h2 style={headingStyle()}>Nargiza</h2>
-            <p style={{ ...subStyle(), marginBottom: 20 }}>I grew up in a kitchen where food was never rushed. My grandmother's hands shaped manty the same way her mother's had — patiently, precisely, with love folded into every pleat.</p>
-            <p style={{ ...subStyle(), marginBottom: 20 }}>When I moved to Vienna, I carried those recipes with me — not just as instructions, but as a way of being. Nomad Küche is my way of sharing that inheritance: the warmth of a Central Asian table, the joy of making something with your hands, the quiet power of sitting down together.</p>
-            <p style={{ fontFamily: "'EB Garamond', serif", fontSize: 18, fontStyle: "italic", color: T.crimson, lineHeight: 1.5 }}>Every fold is a conversation with home.</p>
+            <p style={{ ...subStyle(), marginBottom: 20 }}>For me, food has never been only about filling the body with energy. It is something warm, alive and deeply connected to memory. It can carry culture across thousands of kilometres — through flavours, stories and the way people gather around the table.</p>
+            <p style={{ ...subStyle(), marginBottom: 20 }}>When I travel, I usually start with food: local markets, bazaars, small cafés and conversations with people who cook or sell what they grew up with. I love seeing what people buy, how they cook, what they eat every day and what they proudly share with guests. For me, food is one of the most honest ways to understand a country, its people and their way of life.</p>
+            <p style={{ ...subStyle(), marginBottom: 20 }}>Coming from Central Asia, I also see how our food reflects our history. Many traditional dishes were shaped by a nomadic lifestyle — nourishing, rich and built around what people needed to survive, move and gather. But food is never frozen in time. It can evolve with us, with new places, new ideas and new ways of living.</p>
+            <p style={{ ...subStyle(), marginBottom: 20 }}>With Nomad Küche, I want to share a modern vision of Central Asian cuisine: one that remembers its roots, but is not afraid to transform. I want to keep the warmth, hospitality and soul of our food, while exploring new ways to cook, serve and experience it.</p>
+            <p style={{ fontFamily: "'EB Garamond', serif", fontSize: 18, fontStyle: "italic", color: T.crimson, lineHeight: 1.5 }}>This is not about eating. It is about discovering culture through cooking.</p>
           </FadeIn>
         </div>
       </section>
@@ -604,9 +606,9 @@ export default function NomadKuche() {
           <FadeIn>
             <Divider color={T.gold} opacity={0.25} width={100} />
             <div style={{ height: 28 }} />
-            <h2 style={{ ...headingStyle(T.ivory), textAlign: "center", marginBottom: 20 }}>Let's Create Together</h2>
+            <h2 style={{ ...headingStyle(T.ivory), textAlign: "center", marginBottom: 20 }}>Bring Your Idea to the Table</h2>
             <p style={{ fontFamily: "'Karla', sans-serif", fontSize: 15, color: T.warmGrayLight, lineHeight: 1.7, maxWidth: 520, margin: "0 auto 32px" }}>
-              We work with studios, cafés, cultural spaces, and brands who share our love for authentic food experiences. Pop-ups, workshop series, menu development — if it brings people around a table, we're in.
+              For workshops, private events, pop-ups or collaborations - send us a message and let’s create something warm, thoughtful and delicious together.
             </p>
             <button onClick={() => scrollTo("contact")} style={btnOutline(T.gold)}>Get in Touch</button>
           </FadeIn>
@@ -622,11 +624,11 @@ export default function NomadKuche() {
             <h2 style={{ ...headingStyle(T.ivory), marginBottom: 20 }}>Start a<br />Conversation</h2>
             <p style={{ ...subStyle(T.warmGrayLight), marginBottom: 32 }}>Whether you're inquiring about a workshop, planning a private event, or exploring a partnership — we'd love to hear from you.</p>
             <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
-              <a href="mailto:hello@nomadkuche.com" style={{ fontFamily: "'Karla', sans-serif", fontSize: 15, color: T.gold, textDecoration: "none", display: "flex", alignItems: "center", gap: 10 }}>
-                <span style={{ fontSize: 18 }}>✉</span> hello@nomadkuche.com
+              <a href="mailto:nargiza@nomadkuche.com" style={{ fontFamily: "'Karla', sans-serif", fontSize: 15, color: T.gold, textDecoration: "none", display: "flex", alignItems: "center", gap: 10 }}>
+                <span style={{ fontSize: 18 }}>✉</span> nargiza@nomadkuche.com
               </a>
-              <a href="https://instagram.com/nomadkuche" target="_blank" rel="noopener" style={{ fontFamily: "'Karla', sans-serif", fontSize: 15, color: T.gold, textDecoration: "none", display: "flex", alignItems: "center", gap: 10 }}>
-                <span style={{ fontSize: 18 }}>◎</span> @nomadkuche
+              <a href="https://instagram.com/nomad_kuche" target="_blank" rel="noopener" style={{ fontFamily: "'Karla', sans-serif", fontSize: 15, color: T.gold, textDecoration: "none", display: "flex", alignItems: "center", gap: 10 }}>
+                <span style={{ fontSize: 18 }}>◎</span> @nomad_kuche
               </a>
             </div>
           </FadeIn>

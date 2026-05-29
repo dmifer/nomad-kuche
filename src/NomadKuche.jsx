@@ -564,16 +564,16 @@ export default function NomadKuche() {
           </FadeIn>
           <div style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gridTemplateRows: "auto auto", gap: 16 }}>
             <FadeIn delay={0} style={{ gridColumn: "1 / 3", gridRow: "1 / 3" }}>
-              <ImgPlaceholder aspect="1/1" gradient={`linear-gradient(135deg, ${T.crimson}33, ${T.gold}44)`} borderRadius={10} style={{ height: "100%" }} />
+              <img src="/gallery_1.jpg" alt="Gallery 1" style={{ width: "100%", height: "100%", objectFit: "cover", borderRadius: 10, display: "block" }} />
             </FadeIn>
             <FadeIn delay={0.1} style={{ gridColumn: "3 / 4" }}>
-              <ImgPlaceholder aspect="4/3" gradient={`linear-gradient(160deg, ${T.dark}22, ${T.warmGray}33)`} borderRadius={10} />
+              <img src="/gallery_2.jpeg" alt="Gallery 2" style={{ width: "100%", aspectRatio: "4/3", objectFit: "cover", borderRadius: 10, display: "block" }} />
             </FadeIn>
             <FadeIn delay={0.15} style={{ gridColumn: "4 / 5" }}>
-              <ImgPlaceholder aspect="4/3" gradient={`linear-gradient(200deg, ${T.gold}22, ${T.crimson}22)`} borderRadius={10} />
+              <img src="/gallery_3.jpg" alt="Gallery 3" style={{ width: "100%", aspectRatio: "4/3", objectFit: "cover", borderRadius: 10, display: "block" }} />
             </FadeIn>
             <FadeIn delay={0.2} style={{ gridColumn: "3 / 5" }}>
-              <ImgPlaceholder aspect="21/9" gradient={`linear-gradient(180deg, ${T.ivoryDark}, ${T.warmGrayLight}44)`} borderRadius={10} />
+              <img src="/gallery_4.jpg" alt="Gallery 4" style={{ width: "100%", aspectRatio: "21/9", objectFit: "cover", borderRadius: 10, display: "block" }} />
             </FadeIn>
           </div>
           <style>{`@media (max-width: 640px) { #gallery [style*="grid-template-columns"] { grid-template-columns: 1fr 1fr !important; } }`}</style>
@@ -585,7 +585,7 @@ export default function NomadKuche() {
         <div style={{ position: "absolute", bottom: 40, right: "10%", pointerEvents: "none" }}><KusKanat size={120} opacity={0.04} color={T.crimson} flip /></div>
         <div style={{ ...sectionPad, display: "flex", gap: 60, alignItems: "center", flexWrap: "wrap" }}>
           <FadeIn style={{ flex: "1 1 280px", minWidth: 240 }}>
-            <ImgPlaceholder aspect="3/4" gradient={`linear-gradient(170deg, ${T.gold}22, ${T.crimson}22, ${T.ivoryDark})`} borderRadius={10} />
+            <img src="/founder.jpeg" alt="Nargiza" style={{ width: "100%", aspectRatio: "3/4", objectFit: "cover", borderRadius: 10, display: "block" }} />
           </FadeIn>
           <FadeIn delay={0.15} style={{ flex: "1 1 440px", minWidth: 300 }}>
             <p style={{ fontFamily: "'Karla', sans-serif", fontSize: 12, fontWeight: 600, color: T.crimson, letterSpacing: "0.15em", textTransform: "uppercase", marginBottom: 16 }}>The Founder</p>

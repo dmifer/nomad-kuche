@@ -399,9 +399,11 @@ export default function NomadKuche() {
         <div style={{ ...sectionPad, display: "flex", gap: 60, alignItems: "center", flexWrap: "wrap" }}>
           <FadeIn style={{ flex: "1 1 400px", minWidth: 300 }}>
             <p style={{ fontFamily: "'Karla', sans-serif", fontSize: 12, fontWeight: 600, color: T.crimson, letterSpacing: "0.15em", textTransform: "uppercase", marginBottom: 16 }}>About</p>
-            <h2 style={headingStyle()}>Food Is How<br />We Remember</h2>
-            <p style={subStyle()}>Nomad Küche is a culinary project born from the belief that food carries memory — of landscapes, of family, of rituals passed down through generations. We bring Central Asian cuisine to European audiences through hands-on workshops, private events, and collaborative experiences.</p>
-            <p style={{ ...subStyle(), marginBottom: 0 }}>Every dish we share is a piece of the Silk Road: handmade manty, plov cooked over open flames, salads bright with herbs from mountain valleys. We don't just cook — we tell stories.</p>
+            <h2 style={headingStyle()}>The Story Behind<br />Nomad Küche</h2>
+            <p style={subStyle()}>Nomad Küche is rooted in my family story - a story of migration, resilience and keeping culture alive through food.</p>
+            <p style={subStyle()}>My grandparents were Uyghur and came to Kyrgyzstan from China during a time when many Uyghur families were resettling and rebuilding their lives in Central Asia. In a new place, food became one of the strongest ways to preserve memory, language, hospitality and identity.</p>
+            <p style={subStyle()}>My grandfather started his path at the Green Bazaar, and later opened a café together with my grandmother, who supported him and carried the same deep love for cooking. Their kitchen became more than a place to prepare food - it became a place where culture was shared, protected and passed on.</p>
+            <p style={{ ...subStyle(), marginBottom: 0 }}>Nomad Küche continues this feeling in Vienna: through handmade dishes, warm tea, stories and shared tables that bring people closer to Central Asian culture.</p>
           </FadeIn>
           <FadeIn delay={0.15} style={{ flex: "1 1 360px", minWidth: 280 }}>
             <ImgPlaceholder aspect="3/4" gradient={`linear-gradient(160deg, ${T.crimson}22, ${T.gold}33, ${T.ivoryDark})`} borderRadius={10} />
@@ -421,9 +423,9 @@ export default function NomadKuche() {
           </FadeIn>
           <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))", gap: 28 }}>
             {[
-              { title: "Public Workshops", desc: "Join a group of fellow food lovers for a 3–4 hour manty-making session. Learn the dough, the filling, the folds — and sit down together to eat what you've made.", tag: "Open to all", cta: "reserve", ctaLabel: "Reserve a spot →" },
-              { title: "Private Events", desc: "Host an intimate dinner or hands-on workshop for your group. Whether a birthday, team event, or gathering of friends — we design the experience around you.", tag: "By request", cta: "contact", ctaLabel: "Get in touch →" },
-              { title: "Collaborations", desc: "We partner with studios, cafés, and brands to create pop-up experiences, menu collaborations, and cultural events that bring something genuinely new to the table.", tag: "For partners", cta: "contact", ctaLabel: "Get in touch →" },
+              { title: "Cooking Workshops", desc: "Join a small group of curious food lovers for a hands-on Central Asian cooking class. Learn how to prepare handmade dishes - from dough and fillings to folding, steaming and serving - then gather around the table to taste what you’ve made. ", tag: "Open to all", cta: "reserve", ctaLabel: "Reserve a spot →" },
+              { title: "Private Events", desc: "Host a warm cooking experience for your own group - from birthdays and friend gatherings to team events. We design the workshop around your occasion, with handmade food, stories, tea and a shared table.", tag: "By request", cta: "contact", ctaLabel: "Get in touch →" },
+              { title: "Collaborations", desc: "We collaborate with cafés, studios, cultural spaces and brands to create pop-up workshops, tasting evenings and food experiences that connect people through Central Asian cuisine.", tag: "For partners", cta: "contact", ctaLabel: "Get in touch →" },
             ].map((card, i) => (
               <FadeIn key={i} delay={i * 0.12}>
                 <div style={{
@@ -462,11 +464,11 @@ export default function NomadKuche() {
             <h2 style={{
               fontFamily: "'EB Garamond', serif", fontWeight: 400, fontSize: "clamp(28px, 4vw, 44px)",
               color: T.ivory, lineHeight: 1.3, maxWidth: 640, margin: "0 auto 20px", fontStyle: "italic",
-            }}>"In our tradition, the table is never just a table. It is where generations meet."</h2>
+            }}>"In my family, food was never just food. It was memory, care and a way to feel at home."</h2>
             <p style={{
               fontFamily: "'Karla', sans-serif", fontSize: 15, color: "rgba(245,240,232,0.7)",
               lineHeight: 1.7, maxWidth: 520, margin: "0 auto",
-            }}>Central Asian food is ritual — the slow folding of dough, the patience of a long simmer, the joy of sharing from a single dish. At Nomad Küche, we honor that ritual by inviting you into it.</p>
+            }}>Central Asian food is a ritual - from the first ingredients to the final shared dish, from warm tea to stories around the table. At Nomad Küche, we invite you into that feeling.</p>
           </FadeIn>
         </div>
       </section>

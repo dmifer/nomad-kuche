@@ -380,6 +380,9 @@ export default function NomadKuche() {
           <div style={{ display: "flex", gap: 16, justifyContent: "center", flexWrap: "wrap" }}>
             <button onClick={() => scrollTo("reserve")} style={btnPrimary}>Reserve a Spot</button>
             <button onClick={() => scrollTo("about")} style={btnOutline(T.warmGrayLight)}>Discover</button>
+            <a href="https://instagram.com/nomad_kuche" target="_blank" rel="noopener noreferrer" style={{ ...btnOutline(T.warmGrayLight), display: "inline-flex", alignItems: "center", gap: 8, textDecoration: "none" }}>
+              Instagram
+            </a>
           </div>
         </div>
 
@@ -657,8 +660,9 @@ export default function NomadKuche() {
               <a href="mailto:nargiza@nomadkuche.com" style={{ fontFamily: "'Karla', sans-serif", fontSize: 15, color: T.gold, textDecoration: "none", display: "flex", alignItems: "center", gap: 10 }}>
                 <span style={{ fontSize: 18 }}>✉</span> nargiza@nomadkuche.com
               </a>
-              <a href="https://instagram.com/nomad_kuche" target="_blank" rel="noopener" style={{ fontFamily: "'Karla', sans-serif", fontSize: 15, color: T.gold, textDecoration: "none", display: "flex", alignItems: "center", gap: 10 }}>
-                <span style={{ fontSize: 18 }}>◎</span> @nomad_kuche
+              <a href="https://instagram.com/nomad_kuche" target="_blank" rel="noopener noreferrer" style={{ fontFamily: "'Karla', sans-serif", fontSize: 15, color: T.gold, textDecoration: "none", display: "flex", alignItems: "center", gap: 10 }}>
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke={T.gold} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1.5" fill={T.gold} stroke="none"/></svg>
+                @nomad_kuche
               </a>
             </div>
           </FadeIn>

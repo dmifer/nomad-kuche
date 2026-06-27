@@ -278,7 +278,7 @@ export default function NomadKuche() {
         @keyframes fadeUp { from { opacity: 0; transform: translateY(20px) } to { opacity: 1; transform: translateY(0) } }
         @keyframes spin { from { transform: rotate(0deg) } to { transform: rotate(360deg) } }
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        html { scroll-behavior: smooth; }
+        html, body { scroll-behavior: smooth; overflow-x: hidden; max-width: 100%; }
         ::selection { background: ${T.crimson}; color: white; }
         input::placeholder, textarea::placeholder { color: ${T.warmGrayLight}; }
       `}</style>
@@ -382,6 +382,9 @@ export default function NomadKuche() {
             <button onClick={() => scrollTo("about")} style={btnOutline(T.warmGrayLight)}>Discover</button>
             <a href="https://instagram.com/nomad_kuche" target="_blank" rel="noopener noreferrer" style={{ ...btnOutline(T.warmGrayLight), display: "inline-flex", alignItems: "center", gap: 8, textDecoration: "none" }}>
               Instagram
+            </a>
+            <a href="https://share.google/Y5TXIxCC6XHzbozP8" target="_blank" rel="noopener noreferrer" style={{ ...btnOutline(T.warmGrayLight), display: "inline-flex", alignItems: "center", gap: 8, textDecoration: "none" }}>
+              Reviews
             </a>
           </div>
         </div>

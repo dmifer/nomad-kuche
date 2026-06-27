@@ -570,13 +570,13 @@ export default function NomadKuche() {
               <img src="/gallery_1.jpg" alt="Gallery 1" style={{ width: "100%", height: "100%", objectFit: "cover", borderRadius: 10, display: "block" }} />
             </FadeIn>
             <FadeIn delay={0.1} style={{ gridColumn: "3 / 4" }}>
-              <img src="/gallery_2.jpeg" alt="Gallery 2" style={{ width: "100%", aspectRatio: "4/3", objectFit: "cover", borderRadius: 10, display: "block" }} />
+              <img src="/gallery_2.jpg" alt="Gallery 2" style={{ width: "100%", aspectRatio: "3/4", objectFit: "cover", borderRadius: 10, display: "block" }} />
             </FadeIn>
             <FadeIn delay={0.15} style={{ gridColumn: "4 / 5" }}>
-              <img src="/gallery_3.jpg" alt="Gallery 3" style={{ width: "100%", aspectRatio: "4/3", objectFit: "cover", borderRadius: 10, display: "block" }} />
+              <img src="/gallery_3.jpg" alt="Gallery 3" style={{ width: "100%", aspectRatio: "3/4", objectFit: "cover", borderRadius: 10, display: "block" }} />
             </FadeIn>
             <FadeIn delay={0.2} style={{ gridColumn: "3 / 5" }}>
-              <img src="/gallery_4.jpg" alt="Gallery 4" style={{ width: "100%", aspectRatio: "21/9", objectFit: "cover", borderRadius: 10, display: "block" }} />
+              <img src="/gallery_4.jpg" alt="Gallery 4" style={{ width: "100%", aspectRatio: "16/9", objectFit: "cover", borderRadius: 10, display: "block" }} />
             </FadeIn>
           </div>
           <style>{`

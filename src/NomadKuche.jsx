@@ -383,7 +383,7 @@ export default function NomadKuche() {
             <a href="https://instagram.com/nomad_kuche" target="_blank" rel="noopener noreferrer" style={{ ...btnOutline(T.warmGrayLight), display: "inline-flex", alignItems: "center", gap: 8, textDecoration: "none" }}>
               Instagram
             </a>
-            <a href="https://share.google/Y5TXIxCC6XHzbozP8" target="_blank" rel="noopener noreferrer" style={{ ...btnOutline(T.warmGrayLight), display: "inline-flex", alignItems: "center", gap: 8, textDecoration: "none" }}>
+            <a href="https://maps.app.goo.gl/T5eWCoeKx18xNHr37" target="_blank" rel="noopener noreferrer" style={{ ...btnOutline(T.warmGrayLight), display: "inline-flex", alignItems: "center", gap: 8, textDecoration: "none" }}>
               Reviews
             </a>
           </div>

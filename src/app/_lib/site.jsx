@@ -1,4 +1,4 @@
-import Script from "next/script";
+import ConsentBanner from "../../ConsentBanner";
 import { content } from "../../content";
 
 export const SITE_URL = "https://nomadkuche.com";
@@ -93,10 +93,23 @@ export function JsonLd({ lang }) {
   );
 }
 
+const CONSENT_AND_GTM = `window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('consent','default',{ad_storage:'denied',analytics_storage:'denied',ad_user_data:'denied',ad_personalization:'denied',wait_for_update:500});
+try{if(localStorage.getItem('nk_consent')==='granted'){gtag('consent','update',{ad_storage:'granted',analytics_storage:'granted',ad_user_data:'granted',ad_personalization:'granted'});}}catch(e){}
+(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-KM8LRZ6Q');`;
+
 export function RootShell({ lang, children }) {
   return (
     <html lang={lang}>
       <head>
+        {/* Consent Mode v2 defaults + data layer must run before GTM. GA4 is sent by the Google tag inside GTM. */}
+        <script dangerouslySetInnerHTML={{ __html: CONSENT_AND_GTM }} />
+
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link
@@ -116,20 +129,7 @@ export function RootShell({ lang, children }) {
         </noscript>
 
         {children}
-
-        {/* Google Tag Manager */}
-        <Script id="gtm" strategy="afterInteractive">{`(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-})(window,document,'script','dataLayer','GTM-KM8LRZ6Q');`}</Script>
-
-        {/* Google tag (gtag.js) */}
-        <Script src="https://www.googletagmanager.com/gtag/js?id=G-7P2D6522X8" strategy="afterInteractive" />
-        <Script id="gtag" strategy="afterInteractive">{`window.dataLayer = window.dataLayer || [];
-function gtag(){dataLayer.push(arguments);}
-gtag('js', new Date());
-gtag('config', 'G-7P2D6522X8');`}</Script>
+        <ConsentBanner lang={lang} />
       </body>
     </html>
   );

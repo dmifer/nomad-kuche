@@ -2,6 +2,8 @@
 
 import { useState, useEffect, useRef, useCallback } from "react";
 import { content } from "./content";
+import { track, BOOKING_VALUE } from "./analytics";
+import { OPEN_CONSENT_EVENT } from "./ConsentBanner";
 
 /* ─── palette & tokens ─── */
 const T = {
@@ -123,6 +125,7 @@ const FadeIn = ({ children, delay = 0, style = {}, className = "" }) => {
 };
 
 /* ─── Cal.com Inline Embed ─── */
+let lastBookingAt = 0;
 const CalEmbed = ({ loadingText }) => {
   const [loaded, setLoaded] = useState(false);
 
@@ -173,7 +176,29 @@ const CalEmbed = ({ loadingText }) => {
       hideEventTypeDetails: false,
       layout: "month_view",
     });
+
+    // Cal.com embed success callback -> booking_complete (debounced in case both actions fire)
+    const onBooked = () => {
+      const now = Date.now();
+      if (now - lastBookingAt < 5000) return;
+      lastBookingAt = now;
+      track("booking_complete", {
+        booking_type: "manty_workshop",
+        booking_currency: "EUR",
+        ...(BOOKING_VALUE != null && { booking_value: BOOKING_VALUE }),
+      });
+    };
+    ["bookingSuccessful", "bookingSuccessfulV2"].forEach((action) => {
+      window.Cal.ns["manty-workshop"]("on", { action, callback: onBooked });
+    });
   }, []);
+
+  // Embed did not load within 5s -> booking_widget_error
+  useEffect(() => {
+    if (loaded) return;
+    const id = setTimeout(() => track("booking_widget_error"), 5000);
+    return () => clearTimeout(id);
+  }, [loaded]);
 
   return (
     <div style={{
@@ -234,10 +259,35 @@ export default function NomadKuche({ lang = "en" }) {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
+  // section_view: once per section, when it crosses the middle of the viewport
+  // (a 0.5 intersection ratio is never reached by sections taller than 2x the viewport)
+  useEffect(() => {
+    const seen = new Set();
+    const obs = new IntersectionObserver((entries) => {
+      entries.forEach((e) => {
+        if (e.isIntersecting && !seen.has(e.target.id)) {
+          seen.add(e.target.id);
+          track("section_view", { section_name: e.target.id });
+          obs.unobserve(e.target);
+        }
+      });
+    }, { rootMargin: "-50% 0px -50% 0px", threshold: 0 });
+    ["about", "experiences", "workshop", "gallery", "founder", "contact"].forEach((id) => {
+      const el = document.getElementById(id);
+      if (el) obs.observe(el);
+    });
+    return () => obs.disconnect();
+  }, []);
+
   const scrollTo = useCallback((id) => {
     setMenuOpen(false);
     document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
   }, []);
+
+  const reserveClick = (clickText) => {
+    track("reserve_click", { click_text: clickText, click_url: "#reserve" });
+    scrollTo("reserve");
+  };
 
   const navLinks = t.nav;
 
@@ -296,7 +346,7 @@ export default function NomadKuche({ lang = "en" }) {
 
         <div style={{ display: "flex", gap: 32, alignItems: "center" }} className="desktop-nav">
           {navLinks.map((l) => (
-            <a key={l.id} href={`#${l.id}`} onClick={(e) => { e.preventDefault(); scrollTo(l.id); }} style={{
+            <a key={l.id} href={`#${l.id}`} onClick={(e) => { e.preventDefault(); track("nav_click", { section_name: l.id }); scrollTo(l.id); }} style={{
               fontFamily: "'Karla', sans-serif", fontSize: 13, fontWeight: 500,
               color: T.warmGrayLight, cursor: "pointer", letterSpacing: "0.06em",
               textTransform: "uppercase", transition: "color .2s", textDecoration: "none",
@@ -305,10 +355,10 @@ export default function NomadKuche({ lang = "en" }) {
               {l.label}
             </a>
           ))}
-          <button onClick={() => scrollTo("reserve")} style={{
+          <button onClick={() => reserveClick(t.reserveShort)} style={{
             ...btnOutline(T.gold), padding: "8px 24px", fontSize: 12,
           }}>{t.reserveShort}</button>
-          <a href={t.switch.href} hrefLang={t.switch.hrefLang} lang={t.switch.hrefLang} title={t.switch.title} style={{
+          <a href={t.switch.href} hrefLang={t.switch.hrefLang} lang={t.switch.hrefLang} title={t.switch.title} onClick={() => track("language_switch", { link_url: t.switch.href })} style={{
             fontFamily: "'Karla', sans-serif", fontSize: 13, fontWeight: 600,
             color: T.warmGrayLight, letterSpacing: "0.1em", textDecoration: "none",
           }}>{t.switch.label}</a>
@@ -336,13 +386,13 @@ export default function NomadKuche({ lang = "en" }) {
           gap: 32, animation: "fadeIn .25s ease",
         }}>
           {navLinks.map((l) => (
-            <a key={l.id} href={`#${l.id}`} onClick={(e) => { e.preventDefault(); scrollTo(l.id); }} style={{
+            <a key={l.id} href={`#${l.id}`} onClick={(e) => { e.preventDefault(); track("nav_click", { section_name: l.id }); scrollTo(l.id); }} style={{
               fontFamily: "'EB Garamond', serif", fontSize: 28, color: T.ivory,
               cursor: "pointer", letterSpacing: "0.02em", textDecoration: "none",
             }}>{l.label}</a>
           ))}
-          <button onClick={() => { setMenuOpen(false); scrollTo("reserve"); }} style={btnPrimary}>{t.reserveCta}</button>
-          <a href={t.switch.href} hrefLang={t.switch.hrefLang} lang={t.switch.hrefLang} title={t.switch.title} style={{
+          <button onClick={() => reserveClick(t.reserveCta)} style={btnPrimary}>{t.reserveCta}</button>
+          <a href={t.switch.href} hrefLang={t.switch.hrefLang} lang={t.switch.hrefLang} title={t.switch.title} onClick={() => track("language_switch", { link_url: t.switch.href })} style={{
             fontFamily: "'Karla', sans-serif", fontSize: 14, fontWeight: 600,
             color: T.warmGrayLight, letterSpacing: "0.1em", textDecoration: "none",
           }}>{t.switch.label}</a>
@@ -383,12 +433,12 @@ export default function NomadKuche({ lang = "en" }) {
             lineHeight: 1.7, maxWidth: 480, margin: "0 auto 44px", fontWeight: 300,
           }}>{t.hero.sub}</p>
           <div style={{ display: "flex", gap: 16, justifyContent: "center", flexWrap: "wrap" }}>
-            <button onClick={() => scrollTo("reserve")} style={btnPrimary}>{t.reserveCta}</button>
+            <button onClick={() => reserveClick(t.reserveCta)} style={btnPrimary}>{t.reserveCta}</button>
             <button onClick={() => scrollTo("about")} style={btnOutline(T.warmGrayLight)}>{t.hero.discover}</button>
-            <a href="https://instagram.com/nomad_kuche" target="_blank" rel="noopener noreferrer" style={{ ...btnOutline(T.warmGrayLight), display: "inline-flex", alignItems: "center", gap: 8, textDecoration: "none" }}>
+            <a href="https://instagram.com/nomad_kuche" target="_blank" rel="noopener noreferrer" onClick={() => track("instagram_click", { link_url: "https://instagram.com/nomad_kuche" })} style={{ ...btnOutline(T.warmGrayLight), display: "inline-flex", alignItems: "center", gap: 8, textDecoration: "none" }}>
               {t.hero.instagram}
             </a>
-            <a href="https://maps.app.goo.gl/T5eWCoeKx18xNHr37" target="_blank" rel="noopener noreferrer" style={{ ...btnOutline(T.warmGrayLight), display: "inline-flex", alignItems: "center", gap: 8, textDecoration: "none" }}>
+            <a href="https://maps.app.goo.gl/T5eWCoeKx18xNHr37" target="_blank" rel="noopener noreferrer" onClick={() => track("reviews_click", { link_url: "https://maps.app.goo.gl/T5eWCoeKx18xNHr37" })} style={{ ...btnOutline(T.warmGrayLight), display: "inline-flex", alignItems: "center", gap: 8, textDecoration: "none" }}>
               {t.hero.reviews}
             </a>
           </div>
@@ -448,7 +498,11 @@ export default function NomadKuche({ lang = "en" }) {
                   }}>{card.tag}</span>
                   <h3 style={{ fontFamily: "'EB Garamond', serif", fontSize: 24, fontWeight: 500, color: T.textDark, margin: "20px 0 12px" }}>{card.title}</h3>
                   <p style={{ fontFamily: "'Karla', sans-serif", fontSize: 14, color: T.warmGray, lineHeight: 1.7, flex: 1 }}>{card.desc}</p>
-                  <button onClick={() => scrollTo(card.cta)} style={{
+                  <button onClick={() => {
+                    track("offer_cta_click", { click_text: card.ctaLabel, offer_name: card.offer });
+                    if (card.cta === "reserve") track("reserve_click", { click_text: card.ctaLabel, click_url: "#reserve" });
+                    scrollTo(card.cta);
+                  }} style={{
                     marginTop: 20, padding: "10px 0", border: "none", background: "none",
                     fontFamily: "'Karla', sans-serif", fontSize: 13, fontWeight: 600,
                     color: T.crimson, cursor: "pointer", textAlign: "left", letterSpacing: "0.04em",
@@ -519,7 +573,7 @@ export default function NomadKuche({ lang = "en" }) {
           </FadeIn>
 
           <FadeIn style={{ textAlign: "center" }}>
-            <button onClick={() => scrollTo("reserve")} style={btnPrimary}>{t.workshop.cta}</button>
+            <button onClick={() => reserveClick(t.workshop.cta)} style={btnPrimary}>{t.workshop.cta}</button>
           </FadeIn>
         </div>
       </section>
@@ -545,7 +599,7 @@ export default function NomadKuche({ lang = "en" }) {
           </FadeIn>
 
           <FadeIn delay={0.2} style={{ textAlign: "center", marginTop: 24 }}>
-            <a href="https://cal.com/nomadkuche/manty-workshop" target="_blank" rel="noopener" style={{
+            <a href="https://cal.com/nomadkuche/manty-workshop" target="_blank" rel="noopener" onClick={() => track("cal_fallback_click")} style={{
               fontFamily: "'Karla', sans-serif", fontSize: 13, color: T.warmGray, textDecoration: "none",
             }}>
               {t.reserve.troublePre}<span style={{ color: T.crimson, textDecoration: "underline", textUnderlineOffset: 3 }}>{t.reserve.troubleLink}</span>
@@ -638,7 +692,7 @@ export default function NomadKuche({ lang = "en" }) {
             <p style={{ fontFamily: "'Karla', sans-serif", fontSize: 15, color: T.warmGrayLight, lineHeight: 1.7, maxWidth: 520, margin: "0 auto 32px" }}>
               {t.collab.text}
             </p>
-            <button onClick={() => scrollTo("contact")} style={btnOutline(T.gold)}>{t.collab.cta}</button>
+            <button onClick={() => { track("offer_cta_click", { click_text: t.collab.cta, offer_name: "contact_banner" }); scrollTo("contact"); }} style={btnOutline(T.gold)}>{t.collab.cta}</button>
           </FadeIn>
         </div>
       </section>
@@ -652,10 +706,10 @@ export default function NomadKuche({ lang = "en" }) {
             <h2 style={{ ...headingStyle(T.ivory), marginBottom: 20 }}>{t.contact.title[0]}<br />{t.contact.title[1]}</h2>
             <p style={{ ...subStyle(T.warmGrayLight), marginBottom: 32 }}>{t.contact.text}</p>
             <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
-              <a href="mailto:nargiza@nomadkuche.com" style={{ fontFamily: "'Karla', sans-serif", fontSize: 15, color: T.gold, textDecoration: "none", display: "flex", alignItems: "center", gap: 10 }}>
+              <a href="mailto:nargiza@nomadkuche.com" onClick={() => track("email_click", { link_url: "mailto:nargiza@nomadkuche.com" })} style={{ fontFamily: "'Karla', sans-serif", fontSize: 15, color: T.gold, textDecoration: "none", display: "flex", alignItems: "center", gap: 10 }}>
                 <span style={{ fontSize: 18 }}>✉</span> nargiza@nomadkuche.com
               </a>
-              <a href="https://instagram.com/nomad_kuche" target="_blank" rel="noopener noreferrer" style={{ fontFamily: "'Karla', sans-serif", fontSize: 15, color: T.gold, textDecoration: "none", display: "flex", alignItems: "center", gap: 10 }}>
+              <a href="https://instagram.com/nomad_kuche" target="_blank" rel="noopener noreferrer" onClick={() => track("instagram_click", { link_url: "https://instagram.com/nomad_kuche" })} style={{ fontFamily: "'Karla', sans-serif", fontSize: 15, color: T.gold, textDecoration: "none", display: "flex", alignItems: "center", gap: 10 }}>
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke={T.gold} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1.5" fill={T.gold} stroke="none"/></svg>
                 @nomad_kuche
               </a>
@@ -670,6 +724,7 @@ export default function NomadKuche({ lang = "en" }) {
         <p style={{ fontFamily: "'EB Garamond', serif", fontSize: 18, color: T.ivory, marginBottom: 8, letterSpacing: "0.02em" }}>Nomad Küche</p>
         <p style={{ fontFamily: "'Karla', sans-serif", fontSize: 12, color: T.warmGrayLight, letterSpacing: "0.06em" }}>{t.footer.tagline}</p>
         <p style={{ fontFamily: "'Karla', sans-serif", fontSize: 11, color: T.warmGray, marginTop: 20, opacity: 0.6 }}>{t.footer.copyright}</p>
+        <button onClick={() => window.dispatchEvent(new Event(OPEN_CONSENT_EVENT))} style={{ marginTop: 12, background: "none", border: "none", cursor: "pointer", fontFamily: "'Karla', sans-serif", fontSize: 11, color: T.warmGrayLight, textDecoration: "underline", textUnderlineOffset: 3 }}>{t.consent.settings}</button>
       </footer>
     </div>
   );

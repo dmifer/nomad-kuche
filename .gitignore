@@ -28,3 +28,5 @@ yarn-error.log*
 .next/
 out/
 next-env.d.ts
+
+nomadkuche-gtm-tracking-spec.md

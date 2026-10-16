@@ -42,9 +42,9 @@ export const en = {
     title: "Experiences",
     sub: "Three ways to gather around the table",
     cards: [
-      { title: "Cooking Workshops", desc: "Join a small group of curious food lovers for a hands-on Central Asian cooking class. Learn how to prepare handmade dishes - from dough and fillings to folding, steaming and serving - then gather around the table to taste what you’ve made.", tag: "Open to all", cta: "reserve", ctaLabel: "Reserve a spot →" },
-      { title: "Private Events", desc: "Host a warm cooking experience for your own group - from birthdays and friend gatherings to team events. We design the workshop around your occasion, with handmade food, stories, tea and a shared table.", tag: "By request", cta: "contact", ctaLabel: "Get in touch →" },
-      { title: "Collaborations", desc: "We collaborate with cafés, studios, cultural spaces and brands to create pop-up workshops, tasting evenings and food experiences that connect people through Central Asian cuisine.", tag: "For partners", cta: "contact", ctaLabel: "Get in touch →" },
+      { offer: "workshops", title: "Cooking Workshops", desc: "Join a small group of curious food lovers for a hands-on Central Asian cooking class. Learn how to prepare handmade dishes - from dough and fillings to folding, steaming and serving - then gather around the table to taste what you’ve made.", tag: "Open to all", cta: "reserve", ctaLabel: "Reserve a spot →" },
+      { offer: "private_events", title: "Private Events", desc: "Host a warm cooking experience for your own group - from birthdays and friend gatherings to team events. We design the workshop around your occasion, with handmade food, stories, tea and a shared table.", tag: "By request", cta: "contact", ctaLabel: "Get in touch →" },
+      { offer: "collaborations", title: "Collaborations", desc: "We collaborate with cafés, studios, cultural spaces and brands to create pop-up workshops, tasting evenings and food experiences that connect people through Central Asian cuisine.", tag: "For partners", cta: "contact", ctaLabel: "Get in touch →" },
     ],
   },
 
@@ -119,6 +119,14 @@ export const en = {
     text: "Whether you're inquiring about a workshop, planning a private event, or exploring a partnership — we'd love to hear from you.",
   },
 
+  consent: {
+    title: "Cookies & analytics",
+    text: "We use cookies to measure how the site is used and to improve our marketing. You can accept or reject; the site works the same either way.",
+    accept: "Accept",
+    reject: "Reject",
+    settings: "Cookie settings",
+  },
+
   footer: {
     tagline: "Vienna · Central Asian Cuisine · Est. 2025",
     copyright: "© 2025 Nomad Küche. All rights reserved.",
@@ -180,9 +188,9 @@ export const de = {
     title: "Erlebnisse",
     sub: "Drei Wege, sich um den Tisch zu versammeln",
     cards: [
-      { title: "Kochworkshops", desc: "Komm mit einer kleinen Gruppe neugieriger Genussmenschen zu einem praktischen zentralasiatischen Kochkurs. Du lernst, handgemachte Gerichte zuzubereiten – vom Teig über die Füllung bis zum Falten, Dämpfen und Servieren – und genießt anschließend gemeinsam am Tisch, was ihr gekocht habt.", tag: "Offen für alle", cta: "reserve", ctaLabel: "Platz reservieren →" },
-      { title: "Private Events", desc: "Erlebe ein herzliches Kocherlebnis für deine eigene Gruppe – vom Geburtstag über Freundestreffen bis zum Teamevent. Wir gestalten den Workshop passend zu eurem Anlass, mit handgemachtem Essen, Geschichten, Tee und einer gemeinsamen Tafel.", tag: "Auf Anfrage", cta: "contact", ctaLabel: "Kontakt aufnehmen →" },
-      { title: "Kooperationen", desc: "Wir arbeiten mit Cafés, Studios, Kulturräumen und Marken zusammen und gestalten Pop-up-Workshops, Verkostungsabende und Food-Erlebnisse, die Menschen durch die zentralasiatische Küche verbinden.", tag: "Für Partner", cta: "contact", ctaLabel: "Kontakt aufnehmen →" },
+      { offer: "workshops", title: "Kochworkshops", desc: "Komm mit einer kleinen Gruppe neugieriger Genussmenschen zu einem praktischen zentralasiatischen Kochkurs. Du lernst, handgemachte Gerichte zuzubereiten – vom Teig über die Füllung bis zum Falten, Dämpfen und Servieren – und genießt anschließend gemeinsam am Tisch, was ihr gekocht habt.", tag: "Offen für alle", cta: "reserve", ctaLabel: "Platz reservieren →" },
+      { offer: "private_events", title: "Private Events", desc: "Erlebe ein herzliches Kocherlebnis für deine eigene Gruppe – vom Geburtstag über Freundestreffen bis zum Teamevent. Wir gestalten den Workshop passend zu eurem Anlass, mit handgemachtem Essen, Geschichten, Tee und einer gemeinsamen Tafel.", tag: "Auf Anfrage", cta: "contact", ctaLabel: "Kontakt aufnehmen →" },
+      { offer: "collaborations", title: "Kooperationen", desc: "Wir arbeiten mit Cafés, Studios, Kulturräumen und Marken zusammen und gestalten Pop-up-Workshops, Verkostungsabende und Food-Erlebnisse, die Menschen durch die zentralasiatische Küche verbinden.", tag: "Für Partner", cta: "contact", ctaLabel: "Kontakt aufnehmen →" },
     ],
   },
 
@@ -255,6 +263,14 @@ export const de = {
     kicker: "Kontakt",
     title: ["Lass uns ins", "Gespräch kommen"],
     text: "Ob du dich für einen Workshop interessierst, ein privates Event planst oder eine Partnerschaft prüfst – wir freuen uns, von dir zu hören.",
+  },
+
+  consent: {
+    title: "Cookies & Analyse",
+    text: "Wir verwenden Cookies, um die Nutzung der Website zu messen und unser Marketing zu verbessern. Du kannst zustimmen oder ablehnen; die Website funktioniert in beiden Fällen gleich.",
+    accept: "Akzeptieren",
+    reject: "Ablehnen",
+    settings: "Cookie-Einstellungen",
   },
 
   footer: {

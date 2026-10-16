@@ -416,7 +416,7 @@ export default function NomadKuche({ lang = "en" }) {
             ))}
           </FadeIn>
           <FadeIn delay={0.15} style={{ flex: "1 1 360px", minWidth: 280 }}>
-            <img src="/about_photo.jpg" alt={t.about.imgAlt} width={853} height={1213} loading="lazy" decoding="async" style={{ width: "100%", aspectRatio: "3/4", objectFit: "cover", borderRadius: 10, display: "block" }} />
+            <img src="/about_photo.jpg" alt={t.about.imgAlt} width={853} height={1213} loading="lazy" decoding="async" style={{ width: "100%", height: "auto", aspectRatio: "3/4", objectFit: "cover", borderRadius: 10, display: "block" }} />
           </FadeIn>
         </div>
       </section>
@@ -566,13 +566,13 @@ export default function NomadKuche({ lang = "en" }) {
               <img src="/gallery_1.jpg" alt={t.gallery.alts[0]} width={960} height={1280} loading="lazy" decoding="async" style={{ width: "100%", height: "100%", objectFit: "cover", borderRadius: 10, display: "block" }} />
             </FadeIn>
             <FadeIn delay={0.1} style={{ gridColumn: "3 / 4" }}>
-              <img src="/gallery_2.jpg" alt={t.gallery.alts[1]} width={960} height={1280} loading="lazy" decoding="async" style={{ width: "100%", aspectRatio: "3/4", objectFit: "cover", borderRadius: 10, display: "block" }} />
+              <img src="/gallery_2.jpg" alt={t.gallery.alts[1]} width={960} height={1280} loading="lazy" decoding="async" style={{ width: "100%", height: "auto", aspectRatio: "3/4", objectFit: "cover", borderRadius: 10, display: "block" }} />
             </FadeIn>
             <FadeIn delay={0.15} style={{ gridColumn: "4 / 5" }}>
-              <img src="/gallery_3.jpg" alt={t.gallery.alts[2]} width={960} height={1280} loading="lazy" decoding="async" style={{ width: "100%", aspectRatio: "3/4", objectFit: "cover", borderRadius: 10, display: "block" }} />
+              <img src="/gallery_3.jpg" alt={t.gallery.alts[2]} width={960} height={1280} loading="lazy" decoding="async" style={{ width: "100%", height: "auto", aspectRatio: "3/4", objectFit: "cover", borderRadius: 10, display: "block" }} />
             </FadeIn>
             <FadeIn delay={0.2} style={{ gridColumn: "3 / 5" }}>
-              <img src="/gallery_4.jpg" alt={t.gallery.alts[3]} width={990} height={1280} loading="lazy" decoding="async" style={{ width: "100%", aspectRatio: "16/9", objectFit: "cover", borderRadius: 10, display: "block" }} />
+              <img src="/gallery_4.jpg" alt={t.gallery.alts[3]} width={990} height={1280} loading="lazy" decoding="async" style={{ width: "100%", height: "auto", aspectRatio: "16/9", objectFit: "cover", borderRadius: 10, display: "block" }} />
             </FadeIn>
           </div>
           <style>{`
@@ -614,7 +614,7 @@ export default function NomadKuche({ lang = "en" }) {
         <div style={{ position: "absolute", bottom: 40, right: "10%", pointerEvents: "none" }}><KusKanat size={120} opacity={0.04} color={T.crimson} flip /></div>
         <div style={{ ...sectionPad, display: "flex", gap: 60, alignItems: "center", flexWrap: "wrap" }}>
           <FadeIn style={{ flex: "1 1 280px", minWidth: 240 }}>
-            <img src="/founder.jpeg" alt={t.founder.imgAlt} width={1100} height={1486} loading="lazy" decoding="async" style={{ width: "100%", aspectRatio: "3/4", objectFit: "cover", borderRadius: 10, display: "block" }} />
+            <img src="/founder.jpeg" alt={t.founder.imgAlt} width={1100} height={1486} loading="lazy" decoding="async" style={{ width: "100%", height: "auto", aspectRatio: "3/4", objectFit: "cover", borderRadius: 10, display: "block" }} />
           </FadeIn>
           <FadeIn delay={0.15} style={{ flex: "1 1 440px", minWidth: 300 }}>
             <p style={{ fontFamily: "'Karla', sans-serif", fontSize: 12, fontWeight: 600, color: T.crimson, letterSpacing: "0.15em", textTransform: "uppercase", marginBottom: 16 }}>{t.founder.kicker}</p>

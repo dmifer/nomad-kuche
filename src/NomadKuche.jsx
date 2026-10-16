@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect, useRef, useCallback } from "react";
+import { content } from "./content";
 
 /* ─── palette & tokens ─── */
 const T = {
@@ -122,7 +123,7 @@ const FadeIn = ({ children, delay = 0, style = {}, className = "" }) => {
 };
 
 /* ─── Cal.com Inline Embed ─── */
-const CalEmbed = () => {
+const CalEmbed = ({ loadingText }) => {
   const [loaded, setLoaded] = useState(false);
 
   useEffect(() => {
@@ -197,7 +198,7 @@ const CalEmbed = () => {
             animation: "spin 1s linear infinite",
           }} />
           <p style={{ fontFamily: "'Karla', sans-serif", fontSize: 14, color: T.warmGray }}>
-            Loading booking calendar…
+            {loadingText}
           </p>
         </div>
       )}
@@ -220,7 +221,8 @@ const ImgPlaceholder = ({ aspect = "4/3", gradient = `linear-gradient(135deg, ${
 );
 
 /* ─── Main App ─── */
-export default function NomadKuche() {
+export default function NomadKuche({ lang = "en" }) {
+  const t = content[lang];
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
 
@@ -237,14 +239,7 @@ export default function NomadKuche() {
     document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
   }, []);
 
-  const navLinks = [
-    { label: "About", id: "about" },
-    { label: "Experiences", id: "experiences" },
-    { label: "Workshop", id: "workshop" },
-    { label: "Gallery", id: "gallery" },
-    { label: "Founder", id: "founder" },
-    { label: "Contact", id: "contact" },
-  ];
+  const navLinks = t.nav;
 
   const sectionPad = { padding: "100px 24px", maxWidth: 1100, margin: "0 auto" };
   const sectionPadWide = { padding: "100px 24px", maxWidth: 1200, margin: "0 auto" };
@@ -294,7 +289,7 @@ export default function NomadKuche() {
         transition: "all .35s ease",
         display: "flex", alignItems: "center", justifyContent: "space-between",
       }}>
-        <a href="/" onClick={(e) => { e.preventDefault(); window.scrollTo({ top: 0, behavior: "smooth" }); }} style={{
+        <a href={t.home} onClick={(e) => { e.preventDefault(); window.scrollTo({ top: 0, behavior: "smooth" }); }} style={{
           fontFamily: "'EB Garamond', serif", fontSize: 22, fontWeight: 500,
           color: T.ivory, cursor: "pointer", letterSpacing: "0.02em", textDecoration: "none",
         }}>Nomad Küche</a>
@@ -312,7 +307,11 @@ export default function NomadKuche() {
           ))}
           <button onClick={() => scrollTo("reserve")} style={{
             ...btnOutline(T.gold), padding: "8px 24px", fontSize: 12,
-          }}>Reserve</button>
+          }}>{t.reserveShort}</button>
+          <a href={t.switch.href} hrefLang={t.switch.hrefLang} lang={t.switch.hrefLang} title={t.switch.title} style={{
+            fontFamily: "'Karla', sans-serif", fontSize: 13, fontWeight: 600,
+            color: T.warmGrayLight, letterSpacing: "0.1em", textDecoration: "none",
+          }}>{t.switch.label}</a>
         </div>
 
         <button onClick={() => setMenuOpen(!menuOpen)} style={{
@@ -342,7 +341,11 @@ export default function NomadKuche() {
               cursor: "pointer", letterSpacing: "0.02em", textDecoration: "none",
             }}>{l.label}</a>
           ))}
-          <button onClick={() => { setMenuOpen(false); scrollTo("reserve"); }} style={btnPrimary}>Reserve a Spot</button>
+          <button onClick={() => { setMenuOpen(false); scrollTo("reserve"); }} style={btnPrimary}>{t.reserveCta}</button>
+          <a href={t.switch.href} hrefLang={t.switch.hrefLang} lang={t.switch.hrefLang} title={t.switch.title} style={{
+            fontFamily: "'Karla', sans-serif", fontSize: 14, fontWeight: 600,
+            color: T.warmGrayLight, letterSpacing: "0.1em", textDecoration: "none",
+          }}>{t.switch.label}</a>
         </div>
       )}
 
@@ -370,23 +373,23 @@ export default function NomadKuche() {
           <p style={{
             fontFamily: "'Karla', sans-serif", fontSize: 13, fontWeight: 600,
             color: T.gold, letterSpacing: "0.2em", textTransform: "uppercase", marginBottom: 20,
-          }}>Central Asian Cuisine in Vienna</p>
+          }}>{t.hero.kicker}</p>
           <h1 style={{
             fontFamily: "'EB Garamond', serif", fontWeight: 400, fontSize: "clamp(40px, 6vw, 72px)",
             color: T.ivory, lineHeight: 1.1, maxWidth: 700, margin: "0 auto 24px", letterSpacing: "-0.02em",
-          }}>Where Nomad<br />Tradition Meets<br />the Table</h1>
+          }}>{t.hero.title[0]}<br />{t.hero.title[1]}<br />{t.hero.title[2]}</h1>
           <p style={{
             fontFamily: "'Karla', sans-serif", fontSize: 17, color: T.warmGrayLight,
             lineHeight: 1.7, maxWidth: 480, margin: "0 auto 44px", fontWeight: 300,
-          }}>Intimate cooking workshops, pop-up dinners and shared table experiences.</p>
+          }}>{t.hero.sub}</p>
           <div style={{ display: "flex", gap: 16, justifyContent: "center", flexWrap: "wrap" }}>
-            <button onClick={() => scrollTo("reserve")} style={btnPrimary}>Reserve a Spot</button>
-            <button onClick={() => scrollTo("about")} style={btnOutline(T.warmGrayLight)}>Discover</button>
+            <button onClick={() => scrollTo("reserve")} style={btnPrimary}>{t.reserveCta}</button>
+            <button onClick={() => scrollTo("about")} style={btnOutline(T.warmGrayLight)}>{t.hero.discover}</button>
             <a href="https://instagram.com/nomad_kuche" target="_blank" rel="noopener noreferrer" style={{ ...btnOutline(T.warmGrayLight), display: "inline-flex", alignItems: "center", gap: 8, textDecoration: "none" }}>
-              Instagram
+              {t.hero.instagram}
             </a>
             <a href="https://maps.app.goo.gl/T5eWCoeKx18xNHr37" target="_blank" rel="noopener noreferrer" style={{ ...btnOutline(T.warmGrayLight), display: "inline-flex", alignItems: "center", gap: 8, textDecoration: "none" }}>
-              Reviews
+              {t.hero.reviews}
             </a>
           </div>
         </div>
@@ -396,7 +399,7 @@ export default function NomadKuche() {
           display: "flex", flexDirection: "column", alignItems: "center", gap: 8,
           animation: "fadeIn 1.2s ease 0.5s both",
         }}>
-          <span style={{ fontFamily: "'Karla', sans-serif", fontSize: 11, color: T.warmGrayLight, letterSpacing: "0.1em", textTransform: "uppercase" }}>Scroll</span>
+          <span style={{ fontFamily: "'Karla', sans-serif", fontSize: 11, color: T.warmGrayLight, letterSpacing: "0.1em", textTransform: "uppercase" }}>{t.hero.scroll}</span>
           <div style={{ width: 1, height: 40, background: `linear-gradient(to bottom, ${T.warmGrayLight}, transparent)` }} />
         </div>
       </section>
@@ -406,15 +409,14 @@ export default function NomadKuche() {
         <div style={{ position: "absolute", top: 40, right: 60, pointerEvents: "none" }}><PetroSpiral size={70} opacity={0.06} color={T.crimson} /></div>
         <div style={{ ...sectionPad, display: "flex", gap: 60, alignItems: "center", flexWrap: "wrap" }}>
           <FadeIn style={{ flex: "1 1 400px", minWidth: 300 }}>
-            <p style={{ fontFamily: "'Karla', sans-serif", fontSize: 12, fontWeight: 600, color: T.crimson, letterSpacing: "0.15em", textTransform: "uppercase", marginBottom: 16 }}>About</p>
-            <h2 style={headingStyle()}>The Story Behind<br />Nomad Küche</h2>
-            <p style={subStyle()}>Nomad Küche is rooted in my family story - a story of migration, resilience and keeping culture alive through food.</p>
-            <p style={subStyle()}>My grandparents were Uyghur and came to Kyrgyzstan from China during a time when many Uyghur families were resettling and rebuilding their lives in Central Asia. In a new place, food became one of the strongest ways to preserve memory, language, hospitality and identity.</p>
-            <p style={subStyle()}>My grandfather started his path at the Green Bazaar, and later opened a café together with my grandmother, who supported him and carried the same deep love for cooking. Their kitchen became more than a place to prepare food - it became a place where culture was shared, protected and passed on.</p>
-            <p style={{ ...subStyle(), marginBottom: 0 }}>Nomad Küche continues this feeling in Vienna: through handmade dishes, warm tea, stories and shared tables that bring people closer to Central Asian culture.</p>
+            <p style={{ fontFamily: "'Karla', sans-serif", fontSize: 12, fontWeight: 600, color: T.crimson, letterSpacing: "0.15em", textTransform: "uppercase", marginBottom: 16 }}>{t.about.kicker}</p>
+            <h2 style={headingStyle()}>{t.about.title[0]}<br />{t.about.title[1]}</h2>
+            {t.about.paragraphs.map((para, i, arr) => (
+              <p key={i} style={i === arr.length - 1 ? { ...subStyle(), marginBottom: 0 } : subStyle()}>{para}</p>
+            ))}
           </FadeIn>
           <FadeIn delay={0.15} style={{ flex: "1 1 360px", minWidth: 280 }}>
-            <img src="/about_photo.jpg" alt="Vintage family photograph from the story behind Nomad Küche" width={853} height={1213} loading="lazy" decoding="async" style={{ width: "100%", aspectRatio: "3/4", objectFit: "cover", borderRadius: 10, display: "block" }} />
+            <img src="/about_photo.jpg" alt={t.about.imgAlt} width={853} height={1213} loading="lazy" decoding="async" style={{ width: "100%", aspectRatio: "3/4", objectFit: "cover", borderRadius: 10, display: "block" }} />
           </FadeIn>
         </div>
       </section>
@@ -426,15 +428,11 @@ export default function NomadKuche() {
           <FadeIn style={{ textAlign: "center", marginBottom: 60 }}>
             <Divider color={T.crimson} opacity={0.2} width={120} />
             <div style={{ height: 28 }} />
-            <h2 style={{ ...headingStyle(), textAlign: "center" }}>Experiences</h2>
-            <p style={{ ...subStyle(), margin: "0 auto" }}>Three ways to gather around the table</p>
+            <h2 style={{ ...headingStyle(), textAlign: "center" }}>{t.experiences.title}</h2>
+            <p style={{ ...subStyle(), margin: "0 auto" }}>{t.experiences.sub}</p>
           </FadeIn>
           <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))", gap: 28 }}>
-            {[
-              { title: "Cooking Workshops", desc: "Join a small group of curious food lovers for a hands-on Central Asian cooking class. Learn how to prepare handmade dishes - from dough and fillings to folding, steaming and serving - then gather around the table to taste what you’ve made. ", tag: "Open to all", cta: "reserve", ctaLabel: "Reserve a spot →" },
-              { title: "Private Events", desc: "Host a warm cooking experience for your own group - from birthdays and friend gatherings to team events. We design the workshop around your occasion, with handmade food, stories, tea and a shared table.", tag: "By request", cta: "contact", ctaLabel: "Get in touch →" },
-              { title: "Collaborations", desc: "We collaborate with cafés, studios, cultural spaces and brands to create pop-up workshops, tasting evenings and food experiences that connect people through Central Asian cuisine.", tag: "For partners", cta: "contact", ctaLabel: "Get in touch →" },
-            ].map((card, i) => (
+            {t.experiences.cards.map((card, i) => (
               <FadeIn key={i} delay={i * 0.12}>
                 <div style={{
                   background: "white", borderRadius: 10, padding: "36px 32px",
@@ -472,11 +470,11 @@ export default function NomadKuche() {
             <h2 style={{
               fontFamily: "'EB Garamond', serif", fontWeight: 400, fontSize: "clamp(28px, 4vw, 44px)",
               color: T.ivory, lineHeight: 1.3, maxWidth: 640, margin: "0 auto 20px", fontStyle: "italic",
-            }}>"In my family, food was never just food. It was memory, care and a way to feel at home."</h2>
+            }}>{t.culture.quote}</h2>
             <p style={{
               fontFamily: "'Karla', sans-serif", fontSize: 15, color: "rgba(245,240,232,0.7)",
               lineHeight: 1.7, maxWidth: 520, margin: "0 auto",
-            }}>Central Asian food is a ritual - from the first ingredients to the final shared dish, from warm tea to stories around the table. At Nomad Küche, we invite you into that feeling.</p>
+            }}>{t.culture.text}</p>
           </FadeIn>
         </div>
       </section>
@@ -488,20 +486,13 @@ export default function NomadKuche() {
           <FadeIn style={{ textAlign: "center", marginBottom: 60 }}>
             <Divider color={T.gold} opacity={0.25} width={120} />
             <div style={{ height: 28 }} />
-            <p style={{ fontFamily: "'Karla', sans-serif", fontSize: 12, fontWeight: 600, color: T.gold, letterSpacing: "0.15em", textTransform: "uppercase", marginBottom: 16 }}>What to expect</p>
-            <h2 style={{ ...headingStyle(T.ivory), textAlign: "center" }}>The Manty Workshop</h2>
-            <p style={{ ...subStyle(T.warmGrayLight), margin: "0 auto" }}>A hands-on Central Asian cooking experience from dough to shared table</p>
+            <p style={{ fontFamily: "'Karla', sans-serif", fontSize: 12, fontWeight: 600, color: T.gold, letterSpacing: "0.15em", textTransform: "uppercase", marginBottom: 16 }}>{t.workshop.kicker}</p>
+            <h2 style={{ ...headingStyle(T.ivory), textAlign: "center" }}>{t.workshop.title}</h2>
+            <p style={{ ...subStyle(T.warmGrayLight), margin: "0 auto" }}>{t.workshop.sub}</p>
           </FadeIn>
 
           <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))", gap: 20, marginBottom: 56 }}>
-            {[
-              { num: "01", title: "Welcome & Drinks", desc: "We begin with a warm welcome, coffee/tea/soda (herbal mountain tea) and a short story about manty and Central Asian table culture." },
-              { num: "02", title: "The Dough", desc: "You'll learn how to make and roll the dough by hand — soft, simple and beginner-friendly." },
-              { num: "03", title: "The Filling", desc: "Together we'll prepare the filling, with a vegan option included, and learn what makes manty so comforting and full of flavour." },
-              { num: "04", title: "The Shapes", desc: "You'll learn different manty shapes - from simple folds to more traditional styles." },
-              { num: "05", title: "Sauces & Steam", desc: "We'll make two homemade sauces, steam the manty and prepare the table while everything comes together." },
-              { num: "06", title: "The Shared Table", desc: "At the end, we'll gather around the table and enjoy our freshly steamed manty with sauces, seasonal sides and herbal mountain tea. " },
-            ].map((s, i) => (
+            {t.workshop.steps.map((s, i) => (
               <FadeIn key={i} delay={i * 0.08}>
                 <div style={{ padding: "28px 24px", borderRadius: 8, border: `1px solid rgba(196,147,63,0.1)`, background: "rgba(196,147,63,0.03)" }}>
                   <span style={{ fontFamily: "'EB Garamond', serif", fontSize: 32, fontWeight: 400, color: T.gold, opacity: 0.4 }}>{s.num}</span>
@@ -518,7 +509,7 @@ export default function NomadKuche() {
               marginBottom: 44, padding: "32px 0",
               borderTop: `1px solid rgba(196,147,63,0.1)`, borderBottom: `1px solid rgba(196,147,63,0.1)`,
             }}>
-              {[{ value: "12–15", label: "Guests" }, { value: "2–3h", label: "Duration" }, { value: "100%", label: "Handmade" }].map((m, i) => (
+              {t.workshop.metrics.map((m, i) => (
                 <div key={i} style={{ textAlign: "center" }}>
                   <div style={{ fontFamily: "'EB Garamond', serif", fontSize: 36, fontWeight: 400, color: T.gold, lineHeight: 1 }}>{m.value}</div>
                   <div style={{ fontFamily: "'Karla', sans-serif", fontSize: 12, fontWeight: 500, color: T.warmGrayLight, letterSpacing: "0.1em", textTransform: "uppercase", marginTop: 6 }}>{m.label}</div>
@@ -528,7 +519,7 @@ export default function NomadKuche() {
           </FadeIn>
 
           <FadeIn style={{ textAlign: "center" }}>
-            <button onClick={() => scrollTo("reserve")} style={btnPrimary}>Reserve Your Workshop</button>
+            <button onClick={() => scrollTo("reserve")} style={btnPrimary}>{t.workshop.cta}</button>
           </FadeIn>
         </div>
       </section>
@@ -541,23 +532,23 @@ export default function NomadKuche() {
           <FadeIn style={{ textAlign: "center", marginBottom: 40 }}>
             <Divider color={T.crimson} opacity={0.2} width={120} />
             <div style={{ height: 28 }} />
-            <h2 style={{ ...headingStyle(), textAlign: "center" }}>Reserve a Spot</h2>
-            <p style={{ ...subStyle(), margin: "0 auto 8px" }}>Choose a date and time that works for you. You'll receive a confirmation email with everything you need. After your reservation, we'll contact you with payment details to confirm your place.</p>
+            <h2 style={{ ...headingStyle(), textAlign: "center" }}>{t.reserve.title}</h2>
+            <p style={{ ...subStyle(), margin: "0 auto 8px" }}>{t.reserve.text}</p>
             <p style={{ fontFamily: "'Karla', sans-serif", fontSize: 13, color: T.warmGrayLight, margin: "0 auto" }}>
-              For private events or other inquiries, use the{" "}
-              <a href="#contact" onClick={(e) => { e.preventDefault(); scrollTo("contact"); }} style={{ color: T.crimson, cursor: "pointer", textDecoration: "underline", textUnderlineOffset: 3 }}>contact form</a> below.
+              {t.reserve.privatePre}
+              <a href="#contact" onClick={(e) => { e.preventDefault(); scrollTo("contact"); }} style={{ color: T.crimson, cursor: "pointer", textDecoration: "underline", textUnderlineOffset: 3 }}>{t.reserve.privateLink}</a>{t.reserve.privatePost}
             </p>
           </FadeIn>
 
           <FadeIn delay={0.1}>
-            <CalEmbed />
+            <CalEmbed loadingText={t.reserve.loading} />
           </FadeIn>
 
           <FadeIn delay={0.2} style={{ textAlign: "center", marginTop: 24 }}>
             <a href="https://cal.com/nomadkuche/manty-workshop" target="_blank" rel="noopener" style={{
               fontFamily: "'Karla', sans-serif", fontSize: 13, color: T.warmGray, textDecoration: "none",
             }}>
-              Having trouble? <span style={{ color: T.crimson, textDecoration: "underline", textUnderlineOffset: 3 }}>Book directly on Cal.com</span>
+              {t.reserve.troublePre}<span style={{ color: T.crimson, textDecoration: "underline", textUnderlineOffset: 3 }}>{t.reserve.troubleLink}</span>
             </a>
           </FadeIn>
         </div>
@@ -568,20 +559,20 @@ export default function NomadKuche() {
         <div style={{ position: "absolute", top: 40, right: 80, pointerEvents: "none" }}><StarBurst size={50} opacity={0.05} color={T.crimson} /></div>
         <div style={sectionPadWide}>
           <FadeIn style={{ textAlign: "center", marginBottom: 48 }}>
-            <h2 style={{ ...headingStyle(), textAlign: "center" }}>Gallery</h2>
+            <h2 style={{ ...headingStyle(), textAlign: "center" }}>{t.gallery.title}</h2>
           </FadeIn>
           <div style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gridTemplateRows: "auto auto", gap: 16 }}>
             <FadeIn delay={0} style={{ gridColumn: "1 / 3", gridRow: "1 / 3" }}>
-              <img src="/gallery_1.jpg" alt="Handmade manty dumplings in different folded shapes next to a rolling pin" width={960} height={1280} loading="lazy" decoding="async" style={{ width: "100%", height: "100%", objectFit: "cover", borderRadius: 10, display: "block" }} />
+              <img src="/gallery_1.jpg" alt={t.gallery.alts[0]} width={960} height={1280} loading="lazy" decoding="async" style={{ width: "100%", height: "100%", objectFit: "cover", borderRadius: 10, display: "block" }} />
             </FadeIn>
             <FadeIn delay={0.1} style={{ gridColumn: "3 / 4" }}>
-              <img src="/gallery_2.jpg" alt="Guests in aprons kneading dough at a long wooden table during a Nomad Küche cooking workshop in Vienna" width={960} height={1280} loading="lazy" decoding="async" style={{ width: "100%", aspectRatio: "3/4", objectFit: "cover", borderRadius: 10, display: "block" }} />
+              <img src="/gallery_2.jpg" alt={t.gallery.alts[1]} width={960} height={1280} loading="lazy" decoding="async" style={{ width: "100%", aspectRatio: "3/4", objectFit: "cover", borderRadius: 10, display: "block" }} />
             </FadeIn>
             <FadeIn delay={0.15} style={{ gridColumn: "4 / 5" }}>
-              <img src="/gallery_3.jpg" alt="Workshop table set with mixing bowls, cutting boards and rolling pins, ready for guests" width={960} height={1280} loading="lazy" decoding="async" style={{ width: "100%", aspectRatio: "3/4", objectFit: "cover", borderRadius: 10, display: "block" }} />
+              <img src="/gallery_3.jpg" alt={t.gallery.alts[2]} width={960} height={1280} loading="lazy" decoding="async" style={{ width: "100%", aspectRatio: "3/4", objectFit: "cover", borderRadius: 10, display: "block" }} />
             </FadeIn>
             <FadeIn delay={0.2} style={{ gridColumn: "3 / 5" }}>
-              <img src="/gallery_4.jpg" alt="Freshly steamed manty served with tomato sauce, chili oil and dill yogurt" width={990} height={1280} loading="lazy" decoding="async" style={{ width: "100%", aspectRatio: "16/9", objectFit: "cover", borderRadius: 10, display: "block" }} />
+              <img src="/gallery_4.jpg" alt={t.gallery.alts[3]} width={990} height={1280} loading="lazy" decoding="async" style={{ width: "100%", aspectRatio: "16/9", objectFit: "cover", borderRadius: 10, display: "block" }} />
             </FadeIn>
           </div>
           <style>{`
@@ -623,16 +614,15 @@ export default function NomadKuche() {
         <div style={{ position: "absolute", bottom: 40, right: "10%", pointerEvents: "none" }}><KusKanat size={120} opacity={0.04} color={T.crimson} flip /></div>
         <div style={{ ...sectionPad, display: "flex", gap: 60, alignItems: "center", flexWrap: "wrap" }}>
           <FadeIn style={{ flex: "1 1 280px", minWidth: 240 }}>
-            <img src="/founder.jpeg" alt="Nargiza, founder of Nomad Küche" width={1100} height={1486} loading="lazy" decoding="async" style={{ width: "100%", aspectRatio: "3/4", objectFit: "cover", borderRadius: 10, display: "block" }} />
+            <img src="/founder.jpeg" alt={t.founder.imgAlt} width={1100} height={1486} loading="lazy" decoding="async" style={{ width: "100%", aspectRatio: "3/4", objectFit: "cover", borderRadius: 10, display: "block" }} />
           </FadeIn>
           <FadeIn delay={0.15} style={{ flex: "1 1 440px", minWidth: 300 }}>
-            <p style={{ fontFamily: "'Karla', sans-serif", fontSize: 12, fontWeight: 600, color: T.crimson, letterSpacing: "0.15em", textTransform: "uppercase", marginBottom: 16 }}>The Founder</p>
-            <h2 style={headingStyle()}>Nargiza</h2>
-            <p style={{ ...subStyle(), marginBottom: 20 }}>For me, food has never been only about filling the body with energy. It is something warm, alive and deeply connected to memory. It can carry culture across thousands of kilometres — through flavours, stories and the way people gather around the table.</p>
-            <p style={{ ...subStyle(), marginBottom: 20 }}>When I travel, I usually start with food: local markets, bazaars, small cafés and conversations with people who cook or sell what they grew up with. I love seeing what people buy, how they cook, what they eat every day and what they proudly share with guests. For me, food is one of the most honest ways to understand a country, its people and their way of life.</p>
-            <p style={{ ...subStyle(), marginBottom: 20 }}>Coming from Central Asia, I also see how our food reflects our history. Many traditional dishes were shaped by a nomadic lifestyle — nourishing, rich and built around what people needed to survive, move and gather. But food is never frozen in time. It can evolve with us, with new places, new ideas and new ways of living.</p>
-            <p style={{ ...subStyle(), marginBottom: 20 }}>With Nomad Küche, I want to share a modern vision of Central Asian cuisine: one that remembers its roots, but is not afraid to transform. I want to keep the warmth, hospitality and soul of our food, while exploring new ways to cook, serve and experience it.</p>
-            <p style={{ fontFamily: "'EB Garamond', serif", fontSize: 18, fontStyle: "italic", color: T.crimson, lineHeight: 1.5 }}>This is not about eating. It is about discovering culture through cooking.</p>
+            <p style={{ fontFamily: "'Karla', sans-serif", fontSize: 12, fontWeight: 600, color: T.crimson, letterSpacing: "0.15em", textTransform: "uppercase", marginBottom: 16 }}>{t.founder.kicker}</p>
+            <h2 style={headingStyle()}>{t.founder.name}</h2>
+            {t.founder.paragraphs.map((para, i) => (
+              <p key={i} style={{ ...subStyle(), marginBottom: 20 }}>{para}</p>
+            ))}
+            <p style={{ fontFamily: "'EB Garamond', serif", fontSize: 18, fontStyle: "italic", color: T.crimson, lineHeight: 1.5 }}>{t.founder.closing}</p>
           </FadeIn>
         </div>
       </section>
@@ -644,11 +634,11 @@ export default function NomadKuche() {
           <FadeIn>
             <Divider color={T.gold} opacity={0.25} width={100} />
             <div style={{ height: 28 }} />
-            <h2 style={{ ...headingStyle(T.ivory), textAlign: "center", marginBottom: 20 }}>Bring Your Idea to the Table</h2>
+            <h2 style={{ ...headingStyle(T.ivory), textAlign: "center", marginBottom: 20 }}>{t.collab.title}</h2>
             <p style={{ fontFamily: "'Karla', sans-serif", fontSize: 15, color: T.warmGrayLight, lineHeight: 1.7, maxWidth: 520, margin: "0 auto 32px" }}>
-              For workshops, private events, pop-ups or collaborations - send us a message and let’s create something warm, thoughtful and delicious together.
+              {t.collab.text}
             </p>
-            <button onClick={() => scrollTo("contact")} style={btnOutline(T.gold)}>Get in Touch</button>
+            <button onClick={() => scrollTo("contact")} style={btnOutline(T.gold)}>{t.collab.cta}</button>
           </FadeIn>
         </div>
       </section>
@@ -658,9 +648,9 @@ export default function NomadKuche() {
         <div style={{ position: "absolute", bottom: 40, right: "8%", pointerEvents: "none" }}><SpiralSun size={100} opacity={0.03} color={T.gold} /></div>
         <div style={sectionPad}>
           <FadeIn>
-            <p style={{ fontFamily: "'Karla', sans-serif", fontSize: 12, fontWeight: 600, color: T.gold, letterSpacing: "0.15em", textTransform: "uppercase", marginBottom: 16 }}>Contact</p>
-            <h2 style={{ ...headingStyle(T.ivory), marginBottom: 20 }}>Start a<br />Conversation</h2>
-            <p style={{ ...subStyle(T.warmGrayLight), marginBottom: 32 }}>Whether you're inquiring about a workshop, planning a private event, or exploring a partnership — we'd love to hear from you.</p>
+            <p style={{ fontFamily: "'Karla', sans-serif", fontSize: 12, fontWeight: 600, color: T.gold, letterSpacing: "0.15em", textTransform: "uppercase", marginBottom: 16 }}>{t.contact.kicker}</p>
+            <h2 style={{ ...headingStyle(T.ivory), marginBottom: 20 }}>{t.contact.title[0]}<br />{t.contact.title[1]}</h2>
+            <p style={{ ...subStyle(T.warmGrayLight), marginBottom: 32 }}>{t.contact.text}</p>
             <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
               <a href="mailto:nargiza@nomadkuche.com" style={{ fontFamily: "'Karla', sans-serif", fontSize: 15, color: T.gold, textDecoration: "none", display: "flex", alignItems: "center", gap: 10 }}>
                 <span style={{ fontSize: 18 }}>✉</span> nargiza@nomadkuche.com
@@ -678,8 +668,8 @@ export default function NomadKuche() {
       <footer style={{ background: T.dark, padding: "40px 24px", borderTop: `1px solid rgba(196,147,63,0.08)`, textAlign: "center" }}>
         <KusKanat size={60} opacity={0.12} color={T.gold} style={{ margin: "0 auto 16px", display: "block" }} />
         <p style={{ fontFamily: "'EB Garamond', serif", fontSize: 18, color: T.ivory, marginBottom: 8, letterSpacing: "0.02em" }}>Nomad Küche</p>
-        <p style={{ fontFamily: "'Karla', sans-serif", fontSize: 12, color: T.warmGrayLight, letterSpacing: "0.06em" }}>Vienna · Central Asian Cuisine · Est. 2025</p>
-        <p style={{ fontFamily: "'Karla', sans-serif", fontSize: 11, color: T.warmGray, marginTop: 20, opacity: 0.6 }}>© 2025 Nomad Küche. All rights reserved.</p>
+        <p style={{ fontFamily: "'Karla', sans-serif", fontSize: 12, color: T.warmGrayLight, letterSpacing: "0.06em" }}>{t.footer.tagline}</p>
+        <p style={{ fontFamily: "'Karla', sans-serif", fontSize: 11, color: T.warmGray, marginTop: 20, opacity: 0.6 }}>{t.footer.copyright}</p>
       </footer>
     </div>
   );

@@ -493,8 +493,8 @@ export default function NomadKuche({ lang = "en" }) {
 
           <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))", gap: 20, marginBottom: 56 }}>
             {t.workshop.steps.map((s, i) => (
-              <FadeIn key={i} delay={i * 0.08}>
-                <div style={{ padding: "28px 24px", borderRadius: 8, border: `1px solid rgba(196,147,63,0.1)`, background: "rgba(196,147,63,0.03)" }}>
+              <FadeIn key={i} delay={i * 0.08} style={{ height: "100%" }}>
+                <div style={{ height: "100%", padding: "28px 24px", borderRadius: 8, border: `1px solid rgba(196,147,63,0.1)`, background: "rgba(196,147,63,0.03)" }}>
                   <span style={{ fontFamily: "'EB Garamond', serif", fontSize: 32, fontWeight: 400, color: T.gold, opacity: 0.4 }}>{s.num}</span>
                   <h4 style={{ fontFamily: "'EB Garamond', serif", fontSize: 20, fontWeight: 500, color: T.ivory, margin: "8px 0" }}>{s.title}</h4>
                   <p style={{ fontFamily: "'Karla', sans-serif", fontSize: 14, color: T.warmGrayLight, lineHeight: 1.65 }}>{s.desc}</p>

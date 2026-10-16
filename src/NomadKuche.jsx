@@ -193,6 +193,18 @@ const CalEmbed = ({ loadingText }) => {
     });
   }, []);
 
+  // Treat the widget as loaded once Cal.com renders its iframe. The script's onload
+  // only fires for the first mount, so a remount would otherwise stay "not loaded".
+  useEffect(() => {
+    const el = document.getElementById("cal-inline-embed");
+    if (!el) return;
+    const check = () => { if (el.querySelector("iframe")) setLoaded(true); };
+    check();
+    const mo = new MutationObserver(check);
+    mo.observe(el, { childList: true, subtree: true });
+    return () => mo.disconnect();
+  }, []);
+
   // Embed did not load within 5s -> booking_widget_error
   useEffect(() => {
     if (loaded) return;

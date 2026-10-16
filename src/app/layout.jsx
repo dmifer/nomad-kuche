@@ -2,7 +2,7 @@ import Script from "next/script";
 
 const SITE_URL = "https://nomadkuche.com";
 const TITLE = "Nomad Küche — Central Asian Cuisine in Vienna";
-const DESCRIPTION = "Intimate cooking workshops, pop-up dinners and shared table experiences Handmade. Authentic. Unforgettable.";
+const DESCRIPTION = "Join a hands-on manty cooking workshop in Vienna. Intimate Central Asian cooking classes, pop-up dinners and shared table experiences — handmade, authentic, unforgettable.";
 const SHORT_DESCRIPTION = "Intimate cooking workshops, pop-up dinners and shared table experiences";
 const OG_IMAGE = `${SITE_URL}/og-image.jpg`;
 
@@ -12,6 +12,7 @@ export const metadata = {
   description: DESCRIPTION,
   keywords: "manty workshop, Central Asian cuisine, Vienna food experience, Kyrgyz cooking, cultural dining, nomad kitchen",
   authors: [{ name: "Nomad Küche" }],
+  alternates: { canonical: "/" },
   icons: { icon: "/favicon.svg" },
   openGraph: {
     type: "website",

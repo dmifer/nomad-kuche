@@ -224,7 +224,7 @@ export default function NomadKuche() {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
 
-  // Fonts loaded in index.html via <link> for faster rendering
+  // Fonts are loaded via <link> in app/layout.jsx
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 60);
@@ -294,21 +294,21 @@ export default function NomadKuche() {
         transition: "all .35s ease",
         display: "flex", alignItems: "center", justifyContent: "space-between",
       }}>
-        <div onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })} style={{
+        <a href="/" onClick={(e) => { e.preventDefault(); window.scrollTo({ top: 0, behavior: "smooth" }); }} style={{
           fontFamily: "'EB Garamond', serif", fontSize: 22, fontWeight: 500,
-          color: T.ivory, cursor: "pointer", letterSpacing: "0.02em",
-        }}>Nomad Küche</div>
+          color: T.ivory, cursor: "pointer", letterSpacing: "0.02em", textDecoration: "none",
+        }}>Nomad Küche</a>
 
         <div style={{ display: "flex", gap: 32, alignItems: "center" }} className="desktop-nav">
           {navLinks.map((l) => (
-            <span key={l.id} onClick={() => scrollTo(l.id)} style={{
+            <a key={l.id} href={`#${l.id}`} onClick={(e) => { e.preventDefault(); scrollTo(l.id); }} style={{
               fontFamily: "'Karla', sans-serif", fontSize: 13, fontWeight: 500,
               color: T.warmGrayLight, cursor: "pointer", letterSpacing: "0.06em",
-              textTransform: "uppercase", transition: "color .2s",
+              textTransform: "uppercase", transition: "color .2s", textDecoration: "none",
             }} onMouseEnter={(e) => e.target.style.color = T.gold}
                onMouseLeave={(e) => e.target.style.color = T.warmGrayLight}>
               {l.label}
-            </span>
+            </a>
           ))}
           <button onClick={() => scrollTo("reserve")} style={{
             ...btnOutline(T.gold), padding: "8px 24px", fontSize: 12,
@@ -337,10 +337,10 @@ export default function NomadKuche() {
           gap: 32, animation: "fadeIn .25s ease",
         }}>
           {navLinks.map((l) => (
-            <span key={l.id} onClick={() => scrollTo(l.id)} style={{
+            <a key={l.id} href={`#${l.id}`} onClick={(e) => { e.preventDefault(); scrollTo(l.id); }} style={{
               fontFamily: "'EB Garamond', serif", fontSize: 28, color: T.ivory,
-              cursor: "pointer", letterSpacing: "0.02em",
-            }}>{l.label}</span>
+              cursor: "pointer", letterSpacing: "0.02em", textDecoration: "none",
+            }}>{l.label}</a>
           ))}
           <button onClick={() => { setMenuOpen(false); scrollTo("reserve"); }} style={btnPrimary}>Reserve a Spot</button>
         </div>
@@ -414,7 +414,7 @@ export default function NomadKuche() {
             <p style={{ ...subStyle(), marginBottom: 0 }}>Nomad Küche continues this feeling in Vienna: through handmade dishes, warm tea, stories and shared tables that bring people closer to Central Asian culture.</p>
           </FadeIn>
           <FadeIn delay={0.15} style={{ flex: "1 1 360px", minWidth: 280 }}>
-            <img src="/about_photo.jpg" alt="Nomad Küche story" style={{ width: "100%", aspectRatio: "3/4", objectFit: "cover", borderRadius: 10, display: "block" }} />
+            <img src="/about_photo.jpg" alt="Vintage family photograph from the story behind Nomad Küche" width={853} height={1213} loading="lazy" decoding="async" style={{ width: "100%", aspectRatio: "3/4", objectFit: "cover", borderRadius: 10, display: "block" }} />
           </FadeIn>
         </div>
       </section>
@@ -545,7 +545,7 @@ export default function NomadKuche() {
             <p style={{ ...subStyle(), margin: "0 auto 8px" }}>Choose a date and time that works for you. You'll receive a confirmation email with everything you need. After your reservation, we'll contact you with payment details to confirm your place.</p>
             <p style={{ fontFamily: "'Karla', sans-serif", fontSize: 13, color: T.warmGrayLight, margin: "0 auto" }}>
               For private events or other inquiries, use the{" "}
-              <span onClick={() => scrollTo("contact")} style={{ color: T.crimson, cursor: "pointer", textDecoration: "underline", textUnderlineOffset: 3 }}>contact form</span> below.
+              <a href="#contact" onClick={(e) => { e.preventDefault(); scrollTo("contact"); }} style={{ color: T.crimson, cursor: "pointer", textDecoration: "underline", textUnderlineOffset: 3 }}>contact form</a> below.
             </p>
           </FadeIn>
 
@@ -572,16 +572,16 @@ export default function NomadKuche() {
           </FadeIn>
           <div style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gridTemplateRows: "auto auto", gap: 16 }}>
             <FadeIn delay={0} style={{ gridColumn: "1 / 3", gridRow: "1 / 3" }}>
-              <img src="/gallery_1.jpg" alt="Gallery 1" style={{ width: "100%", height: "100%", objectFit: "cover", borderRadius: 10, display: "block" }} />
+              <img src="/gallery_1.jpg" alt="Handmade manty dumplings in different folded shapes next to a rolling pin" width={960} height={1280} loading="lazy" decoding="async" style={{ width: "100%", height: "100%", objectFit: "cover", borderRadius: 10, display: "block" }} />
             </FadeIn>
             <FadeIn delay={0.1} style={{ gridColumn: "3 / 4" }}>
-              <img src="/gallery_2.jpg" alt="Gallery 2" style={{ width: "100%", aspectRatio: "3/4", objectFit: "cover", borderRadius: 10, display: "block" }} />
+              <img src="/gallery_2.jpg" alt="Guests in aprons kneading dough at a long wooden table during a Nomad Küche cooking workshop in Vienna" width={960} height={1280} loading="lazy" decoding="async" style={{ width: "100%", aspectRatio: "3/4", objectFit: "cover", borderRadius: 10, display: "block" }} />
             </FadeIn>
             <FadeIn delay={0.15} style={{ gridColumn: "4 / 5" }}>
-              <img src="/gallery_3.jpg" alt="Gallery 3" style={{ width: "100%", aspectRatio: "3/4", objectFit: "cover", borderRadius: 10, display: "block" }} />
+              <img src="/gallery_3.jpg" alt="Workshop table set with mixing bowls, cutting boards and rolling pins, ready for guests" width={960} height={1280} loading="lazy" decoding="async" style={{ width: "100%", aspectRatio: "3/4", objectFit: "cover", borderRadius: 10, display: "block" }} />
             </FadeIn>
             <FadeIn delay={0.2} style={{ gridColumn: "3 / 5" }}>
-              <img src="/gallery_4.jpg" alt="Gallery 4" style={{ width: "100%", aspectRatio: "16/9", objectFit: "cover", borderRadius: 10, display: "block" }} />
+              <img src="/gallery_4.jpg" alt="Freshly steamed manty served with tomato sauce, chili oil and dill yogurt" width={990} height={1280} loading="lazy" decoding="async" style={{ width: "100%", aspectRatio: "16/9", objectFit: "cover", borderRadius: 10, display: "block" }} />
             </FadeIn>
           </div>
           <style>{`
@@ -623,7 +623,7 @@ export default function NomadKuche() {
         <div style={{ position: "absolute", bottom: 40, right: "10%", pointerEvents: "none" }}><KusKanat size={120} opacity={0.04} color={T.crimson} flip /></div>
         <div style={{ ...sectionPad, display: "flex", gap: 60, alignItems: "center", flexWrap: "wrap" }}>
           <FadeIn style={{ flex: "1 1 280px", minWidth: 240 }}>
-            <img src="/founder.jpeg" alt="Nargiza" style={{ width: "100%", aspectRatio: "3/4", objectFit: "cover", borderRadius: 10, display: "block" }} />
+            <img src="/founder.jpeg" alt="Nargiza, founder of Nomad Küche" width={1100} height={1486} loading="lazy" decoding="async" style={{ width: "100%", aspectRatio: "3/4", objectFit: "cover", borderRadius: 10, display: "block" }} />
           </FadeIn>
           <FadeIn delay={0.15} style={{ flex: "1 1 440px", minWidth: 300 }}>
             <p style={{ fontFamily: "'Karla', sans-serif", fontSize: 12, fontWeight: 600, color: T.crimson, letterSpacing: "0.15em", textTransform: "uppercase", marginBottom: 16 }}>The Founder</p>

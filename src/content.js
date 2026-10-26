@@ -8,7 +8,8 @@ export const en = {
   nav: [
     { label: "About", id: "about" },
     { label: "Experiences", id: "experiences" },
-    { label: "Workshop", id: "workshop" },
+    { label: "Workshops", id: "workshop" },
+    { label: "Gift", id: "gift" },
     { label: "Gallery", id: "gallery" },
     { label: "Founder", id: "founder" },
     { label: "Contact", id: "contact" },
@@ -42,7 +43,7 @@ export const en = {
     title: "Experiences",
     sub: "Three ways to gather around the table",
     cards: [
-      { offer: "workshops", title: "Cooking Workshops", desc: "Join a small group of curious food lovers for a hands-on Central Asian cooking class. Learn how to prepare handmade dishes - from dough and fillings to folding, steaming and serving - then gather around the table to taste what you’ve made.", tag: "Open to all", cta: "reserve", ctaLabel: "Reserve a spot →" },
+      { offer: "workshops", title: "Cooking Workshops", desc: "Join a small group of curious food lovers for a hands-on Central Asian cooking class - choose manty or lagman. Learn how to prepare handmade dishes - from dough and fillings to folding, steaming and serving - then gather around the table to taste what you’ve made.", tag: "Open to all", cta: "reserve", ctaLabel: "Reserve a spot →" },
       { offer: "private_events", title: "Private Events", desc: "Host a warm cooking experience for your own group - from birthdays and friend gatherings to team events. We design the workshop around your occasion, with handmade food, stories, tea and a shared table.", tag: "By request", cta: "contact", ctaLabel: "Get in touch →" },
       { offer: "collaborations", title: "Collaborations", desc: "We collaborate with cafés, studios, cultural spaces and brands to create pop-up workshops, tasting evenings and food experiences that connect people through Central Asian cuisine.", tag: "For partners", cta: "contact", ctaLabel: "Get in touch →" },
     ],
@@ -55,15 +56,39 @@ export const en = {
 
   workshop: {
     kicker: "What to expect",
-    title: "The Manty Workshop",
-    sub: "A hands-on Central Asian cooking experience from dough to shared table",
-    steps: [
-      { num: "01", title: "Welcome & Drinks", desc: "We begin with a warm welcome, coffee/tea/soda (herbal mountain tea) and a short story about manty and Central Asian table culture." },
-      { num: "02", title: "The Dough", desc: "You'll learn how to make and roll the dough by hand — soft, simple and beginner-friendly." },
-      { num: "03", title: "The Filling", desc: "Together we'll prepare the filling, with a vegan option included, and learn what makes manty so comforting and full of flavour." },
-      { num: "04", title: "The Shapes", desc: "You'll learn different manty shapes - from simple folds to more traditional styles." },
-      { num: "05", title: "Sauces & Steam", desc: "We'll make two homemade sauces, steam the manty and prepare the table while everything comes together." },
-      { num: "06", title: "The Shared Table", desc: "At the end, we'll gather around the table and enjoy our freshly steamed manty with sauces, seasonal sides and herbal mountain tea." },
+    title: "Our Workshops",
+    sub: "Two hands-on Central Asian cooking experiences, from dough to shared table",
+    tabsLabel: "Choose a workshop",
+    photoSoon: "Photo coming soon",
+    items: [
+      {
+        id: "manty",
+        tab: "Manty",
+        title: "The Manty Workshop",
+        sub: "Steamed dumplings, folded by hand - from dough to shared table",
+        steps: [
+          { num: "01", title: "Welcome & Drinks", desc: "We begin with a warm welcome, coffee/tea/soda (herbal mountain tea) and a short story about manty and Central Asian table culture." },
+          { num: "02", title: "The Dough", desc: "You'll learn how to make and roll the dough by hand — soft, simple and beginner-friendly." },
+          { num: "03", title: "The Filling", desc: "Together we'll prepare the filling, with a vegan option included, and learn what makes manty so comforting and full of flavour." },
+          { num: "04", title: "The Shapes", desc: "You'll learn different manty shapes - from simple folds to more traditional styles." },
+          { num: "05", title: "Sauces & Steam", desc: "We'll make two homemade sauces, steam the manty and prepare the table while everything comes together." },
+          { num: "06", title: "The Shared Table", desc: "At the end, we'll gather around the table and enjoy our freshly steamed manty with sauces, seasonal sides and herbal mountain tea." },
+        ],
+      },
+      {
+        id: "lagman",
+        tab: "Lagman",
+        title: "The Lagman Workshop",
+        sub: "Hand-pulled noodles and a rich, savoury broth, from dough to shared bowl",
+        steps: [
+          { num: "01", title: "Welcome & Drinks", desc: "A warm welcome with tea, and a short story about lagman and its Uyghur roots." },
+          { num: "02", title: "The Dough", desc: "You'll make the noodle dough by hand and learn how to rest and oil it so it stretches." },
+          { num: "03", title: "The Pull", desc: "You'll learn to stretch and pull the noodles by hand. Hands-on and beginner-friendly." },
+          { num: "04", title: "The Sauce", desc: "Together we'll prepare the vegetable-and-meat sauce with the spices that give lagman its flavour." },
+          { num: "05", title: "Cook & Assemble", desc: "We'll boil the noodles and combine everything while the table is set." },
+          { num: "06", title: "The Shared Table", desc: "We gather and enjoy the lagman together with herbal mountain tea." },
+        ],
+      },
     ],
     metrics: [
       { value: "12–15", label: "Guests" },
@@ -75,6 +100,7 @@ export const en = {
 
   reserve: {
     title: "Reserve a Spot",
+    choose: "Choose your workshop",
     text: "Choose a date and time that works for you. You'll receive a confirmation email with everything you need. After your reservation, we'll contact you with payment details to confirm your place.",
     privatePre: "For private events or other inquiries, use the ",
     privateLink: "contact form",
@@ -82,6 +108,7 @@ export const en = {
     troublePre: "Having trouble? ",
     troubleLink: "Book directly on Cal.com",
     loading: "Loading booking calendar…",
+    unavailable: "Booking calendar is not available right now.",
   },
 
   gallery: {
@@ -119,6 +146,81 @@ export const en = {
     text: "Whether you're inquiring about a workshop, planning a private event, or exploring a partnership — we'd love to hear from you.",
   },
 
+  reviews: {
+    title: "Reviews from Google",
+    onGoogle: "on Google",
+    countSuffix: "reviews",
+    readAll: "Read all reviews on Google",
+    leave: "Leave a review",
+    more: "Read more",
+    less: "Show less",
+    dots: "Go to review",
+  },
+
+  gift: {
+    kicker: "Gift",
+    title: "Gift a Workshop",
+    text: "Give someone a hands-on evening of Central Asian cooking. Send a request and we'll reply with payment details; the voucher follows after payment.",
+    options_label: "Voucher for",
+    optionPlaceholder: "Choose…",
+    options: [
+      { value: "manty_1", label: "Manty workshop · 1 person" },
+      { value: "lagman_1", label: "Lagman workshop · 1 person" },
+      { value: "two_people", label: "Workshop for 2 people" },
+      { value: "free_amount", label: "Free amount" },
+    ],
+    amount: "Amount (EUR)",
+    name: "Your name",
+    email: "Your email",
+    recipient: "Recipient name (optional)",
+    message: "Personal message (optional)",
+    delivery: "Delivery",
+    deliveries: [
+      { value: "pdf", label: "Digital (PDF by email)" },
+      { value: "pickup", label: "Pick-up" },
+    ],
+    submit: "Request voucher",
+    sending: "Sending…",
+    error: "Something went wrong. Please try again or email us directly.",
+    note: "This is a request, not a purchase. We'll email you payment details and send the voucher after payment.",
+  },
+
+  thanks: {
+    href: "/thank-you/",
+    title: "Thank you!",
+    text: "We've received your request and will get back to you soon.",
+    next: "Next steps",
+    steps: [
+      "Check your inbox for a confirmation email (and your spam folder, just in case).",
+      "For bookings and vouchers, payment details will follow by email.",
+    ],
+    back: "Back to the homepage",
+    instagram: "Follow us on Instagram",
+    metaTitle: "Thank you — Nomad Küche",
+  },
+
+  legal: {
+    footerLabel: "Legal Notice",
+    href: "/impressum/",
+    back: "← Back to the homepage",
+    impressum: {
+      title: "Legal Notice",
+      metaTitle: "Legal Notice — Nomad Küche",
+      metaDescription: "Legal notice (Impressum) of Nomad Küche, Vienna.",
+      rows: [
+        { label: "Owner", value: "Nargiza Korgoldoeva (sole proprietor)" },
+        { label: "Address", value: "Miciostrasse 3, 1150 Vienna" },
+        { label: "Email", value: "nargiza@nomadkuche.com", href: "mailto:nargiza@nomadkuche.com" },
+        { label: "Phone", value: "+43 664 2239463", href: "tel:+436642239463" },
+        { label: "Business purpose", value: "Cooking workshops and gastronomy events" },
+        { label: "Trade authority", value: "Magistratisches Bezirksamt Wien" },
+        { label: "VAT", value: "Small business under § 6 (1) no. 27 UStG – no VAT shown" },
+        { label: "Applicable regulations", value: "Gewerbeordnung (www.ris.bka.gv.at)", href: "https://www.ris.bka.gv.at" },
+        { label: "Online dispute resolution", value: "https://ec.europa.eu/consumers/odr", href: "https://ec.europa.eu/consumers/odr" },
+      ],
+    },
+  },
+
   consent: {
     title: "Cookies & analytics",
     text: "We use cookies to measure how the site is used and to improve our marketing. You can accept or reject; the site works the same either way.",
@@ -134,13 +236,15 @@ export const en = {
 
   meta: {
     title: "Nomad Küche — Central Asian Cuisine in Vienna",
-    description: "Join a hands-on manty cooking workshop in Vienna. Intimate Central Asian cooking classes, pop-up dinners and shared table experiences — handmade, authentic, unforgettable.",
+    description: "Join a hands-on manty or lagman cooking workshop in Vienna. Intimate Central Asian cooking classes, pop-up dinners and shared table experiences — handmade, authentic, unforgettable.",
     shortDescription: "Intimate cooking workshops, pop-up dinners and shared table experiences",
-    keywords: "manty workshop, Central Asian cuisine, Vienna food experience, Kyrgyz cooking, cultural dining, nomad kitchen",
+    keywords: "manty workshop, lagman workshop, Central Asian cuisine, Vienna food experience, Kyrgyz cooking, cultural dining, nomad kitchen",
     ogLocale: "en_US",
     orgDescription: "Central Asian cooking workshops, pop-up dinners and shared table experiences in Vienna.",
     workshopDescription: "A hands-on Central Asian cooking experience from dough to shared table, for 12–15 guests, 2–3 hours.",
     workshopName: "Manty Cooking Workshop",
+    lagmanName: "Lagman Cooking Workshop",
+    lagmanDescription: "Hand-pulled noodles and a rich, savoury broth, from dough to shared bowl, for 12–15 guests, 2–3 hours.",
     privateName: "Private Events",
     privateDescription: "Private cooking experiences for birthdays, friend gatherings and team events.",
   },
@@ -154,7 +258,8 @@ export const de = {
   nav: [
     { label: "Über uns", id: "about" },
     { label: "Erlebnisse", id: "experiences" },
-    { label: "Workshop", id: "workshop" },
+    { label: "Workshops", id: "workshop" },
+    { label: "Gutschein", id: "gift" },
     { label: "Galerie", id: "gallery" },
     { label: "Nargiza", id: "founder" },
     { label: "Kontakt", id: "contact" },
@@ -188,7 +293,7 @@ export const de = {
     title: "Erlebnisse",
     sub: "Drei Wege, sich um den Tisch zu versammeln",
     cards: [
-      { offer: "workshops", title: "Kochworkshops", desc: "Komm mit einer kleinen Gruppe neugieriger Genussmenschen zu einem praktischen zentralasiatischen Kochkurs. Du lernst, handgemachte Gerichte zuzubereiten – vom Teig über die Füllung bis zum Falten, Dämpfen und Servieren – und genießt anschließend gemeinsam am Tisch, was ihr gekocht habt.", tag: "Offen für alle", cta: "reserve", ctaLabel: "Platz reservieren →" },
+      { offer: "workshops", title: "Kochworkshops", desc: "Komm mit einer kleinen Gruppe neugieriger Genussmenschen zu einem praktischen zentralasiatischen Kochkurs – wahlweise Manty oder Lagman. Du lernst, handgemachte Gerichte zuzubereiten – vom Teig über die Füllung bis zum Falten, Dämpfen und Servieren – und genießt anschließend gemeinsam am Tisch, was ihr gekocht habt.", tag: "Offen für alle", cta: "reserve", ctaLabel: "Platz reservieren →" },
       { offer: "private_events", title: "Private Events", desc: "Erlebe ein herzliches Kocherlebnis für deine eigene Gruppe – vom Geburtstag über Freundestreffen bis zum Teamevent. Wir gestalten den Workshop passend zu eurem Anlass, mit handgemachtem Essen, Geschichten, Tee und einer gemeinsamen Tafel.", tag: "Auf Anfrage", cta: "contact", ctaLabel: "Kontakt aufnehmen →" },
       { offer: "collaborations", title: "Kooperationen", desc: "Wir arbeiten mit Cafés, Studios, Kulturräumen und Marken zusammen und gestalten Pop-up-Workshops, Verkostungsabende und Food-Erlebnisse, die Menschen durch die zentralasiatische Küche verbinden.", tag: "Für Partner", cta: "contact", ctaLabel: "Kontakt aufnehmen →" },
     ],
@@ -201,15 +306,39 @@ export const de = {
 
   workshop: {
     kicker: "Was dich erwartet",
-    title: "Der Manty-Workshop",
-    sub: "Ein praktisches zentralasiatisches Kocherlebnis – vom Teig bis zur gemeinsamen Tafel",
-    steps: [
-      { num: "01", title: "Willkommen & Getränke", desc: "Wir beginnen mit einem herzlichen Empfang, Kaffee, Tee oder Softdrink (Bergkräutertee) und einer kurzen Geschichte über Manty und zentralasiatische Tischkultur." },
-      { num: "02", title: "Der Teig", desc: "Du lernst, den Teig von Hand zu kneten und auszurollen – weich, einfach und auch für Anfänger geeignet." },
-      { num: "03", title: "Die Füllung", desc: "Gemeinsam bereiten wir die Füllung zu, auch mit veganer Option, und lernen, was Manty so wohltuend und aromatisch macht." },
-      { num: "04", title: "Die Formen", desc: "Du lernst verschiedene Manty-Formen kennen – von einfachen Falten bis zu traditionellen Varianten." },
-      { num: "05", title: "Saucen & Dampf", desc: "Wir machen zwei hausgemachte Saucen, dämpfen die Manty und decken den Tisch, während alles zusammenkommt." },
-      { num: "06", title: "Die gemeinsame Tafel", desc: "Zum Abschluss versammeln wir uns am Tisch und genießen die frisch gedämpften Manty mit Saucen, saisonalen Beilagen und Bergkräutertee." },
+    title: "Unsere Workshops",
+    sub: "Zwei praktische zentralasiatische Kocherlebnisse – vom Teig bis zur gemeinsamen Tafel",
+    tabsLabel: "Workshop wählen",
+    photoSoon: "Foto folgt",
+    items: [
+      {
+        id: "manty",
+        tab: "Manty",
+        title: "Der Manty-Workshop",
+        sub: "Gedämpfte Teigtaschen, von Hand gefaltet – vom Teig bis zur gemeinsamen Tafel",
+        steps: [
+          { num: "01", title: "Willkommen & Getränke", desc: "Wir beginnen mit einem herzlichen Empfang, Kaffee, Tee oder Softdrink (Bergkräutertee) und einer kurzen Geschichte über Manty und zentralasiatische Tischkultur." },
+          { num: "02", title: "Der Teig", desc: "Du lernst, den Teig von Hand zu kneten und auszurollen – weich, einfach und auch für Anfänger geeignet." },
+          { num: "03", title: "Die Füllung", desc: "Gemeinsam bereiten wir die Füllung zu, auch mit veganer Option, und lernen, was Manty so wohltuend und aromatisch macht." },
+          { num: "04", title: "Die Formen", desc: "Du lernst verschiedene Manty-Formen kennen – von einfachen Falten bis zu traditionellen Varianten." },
+          { num: "05", title: "Saucen & Dampf", desc: "Wir machen zwei hausgemachte Saucen, dämpfen die Manty und decken den Tisch, während alles zusammenkommt." },
+          { num: "06", title: "Die gemeinsame Tafel", desc: "Zum Abschluss versammeln wir uns am Tisch und genießen die frisch gedämpften Manty mit Saucen, saisonalen Beilagen und Bergkräutertee." },
+        ],
+      },
+      {
+        id: "lagman",
+        tab: "Lagman",
+        title: "Der Lagman-Workshop",
+        sub: "Handgezogene Nudeln und eine herzhafte Brühe – vom Teig bis zur gemeinsamen Schüssel",
+        steps: [
+          { num: "01", title: "Willkommen & Getränke", desc: "Herzlicher Empfang mit Tee und eine kurze Geschichte über Lagman und seine uigurischen Wurzeln." },
+          { num: "02", title: "Der Teig", desc: "Du lernst, den Nudelteig von Hand zuzubereiten und richtig ruhen zu lassen." },
+          { num: "03", title: "Das Ziehen", desc: "Du lernst, die Nudeln von Hand zu ziehen. Anfängerfreundlich und macht viel Spaß." },
+          { num: "04", title: "Die Sauce", desc: "Gemeinsam bereiten wir die Gemüse-Fleisch-Sauce zu." },
+          { num: "05", title: "Kochen & Anrichten", desc: "Wir kochen die Nudeln und richten alles gemeinsam an." },
+          { num: "06", title: "Der gemeinsame Tisch", desc: "Wir genießen den Lagman zusammen mit Bergtee." },
+        ],
+      },
     ],
     metrics: [
       { value: "12–15", label: "Gäste" },
@@ -221,6 +350,7 @@ export const de = {
 
   reserve: {
     title: "Platz reservieren",
+    choose: "Workshop wählen",
     text: "Wähle einen Termin, der dir passt. Du erhältst eine Bestätigungs-E-Mail mit allen Informationen. Nach deiner Reservierung melden wir uns mit den Zahlungsdetails, um deinen Platz zu bestätigen.",
     privatePre: "Für private Events oder andere Anfragen nutze bitte das ",
     privateLink: "Kontaktformular",
@@ -228,6 +358,7 @@ export const de = {
     troublePre: "Probleme? ",
     troubleLink: "Direkt auf Cal.com buchen",
     loading: "Buchungskalender wird geladen…",
+    unavailable: "Der Buchungskalender ist derzeit nicht verfügbar.",
   },
 
   gallery: {
@@ -265,6 +396,81 @@ export const de = {
     text: "Ob du dich für einen Workshop interessierst, ein privates Event planst oder eine Partnerschaft prüfst – wir freuen uns, von dir zu hören.",
   },
 
+  reviews: {
+    title: "Bewertungen von Google",
+    onGoogle: "auf Google",
+    countSuffix: "Bewertungen",
+    readAll: "Alle Bewertungen auf Google lesen",
+    leave: "Bewertung schreiben",
+    more: "Mehr lesen",
+    less: "Weniger anzeigen",
+    dots: "Zur Bewertung",
+  },
+
+  gift: {
+    kicker: "Gutschein",
+    title: "Einen Workshop verschenken",
+    text: "Schenke einen Abend voller zentralasiatischer Kochkunst. Schick uns eine Anfrage, wir melden uns mit den Zahlungsdetails; den Gutschein erhältst du nach der Zahlung.",
+    options_label: "Gutschein für",
+    optionPlaceholder: "Auswählen…",
+    options: [
+      { value: "manty_1", label: "Manty-Workshop · 1 Person" },
+      { value: "lagman_1", label: "Lagman-Workshop · 1 Person" },
+      { value: "two_people", label: "Workshop für 2 Personen" },
+      { value: "free_amount", label: "Freier Betrag" },
+    ],
+    amount: "Betrag (EUR)",
+    name: "Dein Name",
+    email: "Deine E-Mail",
+    recipient: "Name der beschenkten Person (optional)",
+    message: "Persönliche Nachricht (optional)",
+    delivery: "Zustellung",
+    deliveries: [
+      { value: "pdf", label: "Digital (PDF per E-Mail)" },
+      { value: "pickup", label: "Abholung" },
+    ],
+    submit: "Gutschein anfragen",
+    sending: "Wird gesendet…",
+    error: "Etwas ist schiefgelaufen. Bitte versuche es erneut oder schreib uns direkt per E-Mail.",
+    note: "Dies ist eine Anfrage, kein Kauf. Wir senden dir die Zahlungsdetails per E-Mail und schicken den Gutschein nach Zahlungseingang.",
+  },
+
+  thanks: {
+    href: "/de/danke/",
+    title: "Danke!",
+    text: "Wir haben deine Anfrage erhalten und melden uns bald bei dir.",
+    next: "Wie es weitergeht",
+    steps: [
+      "Sieh in deinem Posteingang nach der Bestätigungs-E-Mail (und vorsichtshalber im Spam-Ordner).",
+      "Bei Buchungen und Gutscheinen folgen die Zahlungsdetails per E-Mail.",
+    ],
+    back: "Zurück zur Startseite",
+    instagram: "Folge uns auf Instagram",
+    metaTitle: "Danke — Nomad Küche",
+  },
+
+  legal: {
+    footerLabel: "Impressum",
+    href: "/de/impressum/",
+    back: "← Zurück zur Startseite",
+    impressum: {
+      title: "Impressum",
+      metaTitle: "Impressum — Nomad Küche",
+      metaDescription: "Impressum von Nomad Küche, Wien.",
+      rows: [
+        { label: "Inhaberin", value: "Nargiza Korgoldoeva (Einzelunternehmerin)" },
+        { label: "Adresse", value: "Miciostrasse 3, 1150 Wien" },
+        { label: "E-Mail", value: "nargiza@nomadkuche.com", href: "mailto:nargiza@nomadkuche.com" },
+        { label: "Telefon", value: "+43 664 2239463", href: "tel:+436642239463" },
+        { label: "Unternehmensgegenstand", value: "Kochworkshops und Gastronomie-Events" },
+        { label: "Gewerbebehörde", value: "Magistratisches Bezirksamt Wien" },
+        { label: "Umsatzsteuer", value: "Kleinunternehmer gemäß § 6 Abs. 1 Z 27 UStG – keine Umsatzsteuer ausgewiesen" },
+        { label: "Anwendbare Vorschriften", value: "Gewerbeordnung (www.ris.bka.gv.at)", href: "https://www.ris.bka.gv.at" },
+        { label: "Online-Streitbeilegung", value: "https://ec.europa.eu/consumers/odr", href: "https://ec.europa.eu/consumers/odr" },
+      ],
+    },
+  },
+
   consent: {
     title: "Cookies & Analyse",
     text: "Wir verwenden Cookies, um die Nutzung der Website zu messen und unser Marketing zu verbessern. Du kannst zustimmen oder ablehnen; die Website funktioniert in beiden Fällen gleich.",
@@ -280,16 +486,22 @@ export const de = {
 
   meta: {
     title: "Nomad Küche — Zentralasiatische Küche in Wien",
-    description: "Manty-Kochworkshop in Wien: zentralasiatische Kochkurse in kleiner Runde, Pop-up-Dinner und gemeinsames Essen am Tisch — handgemacht, authentisch, unvergesslich.",
+    description: "Manty- und Lagman-Kochworkshop in Wien: zentralasiatische Kochkurse in kleiner Runde, Pop-up-Dinner und gemeinsames Essen am Tisch — handgemacht, authentisch, unvergesslich.",
     shortDescription: "Kochworkshops in kleiner Runde, Pop-up-Dinner und gemeinsame Tafelerlebnisse",
-    keywords: "Manty Workshop, Kochkurs Wien, Kochworkshop Wien, zentralasiatische Küche, kirgisische Küche, Pop-up Dinner Wien",
+    keywords: "Manty Workshop, Lagman Workshop, Kochkurs Wien, Kochworkshop Wien, zentralasiatische Küche, kirgisische Küche, Pop-up Dinner Wien",
     ogLocale: "de_AT",
     orgDescription: "Zentralasiatische Kochworkshops, Pop-up-Dinner und gemeinsame Tafelerlebnisse in Wien.",
     workshopDescription: "Ein praktisches zentralasiatisches Kocherlebnis vom Teig bis zur gemeinsamen Tafel, für 12–15 Gäste, 2–3 Stunden.",
     workshopName: "Manty-Kochworkshop",
+    lagmanName: "Lagman-Kochworkshop",
+    lagmanDescription: "Handgezogene Nudeln und eine herzhafte Brühe, vom Teig bis zur gemeinsamen Schüssel, für 12–15 Gäste, 2–3 Stunden.",
     privateName: "Private Events",
     privateDescription: "Private Kocherlebnisse für Geburtstage, Freundestreffen und Teamevents.",
   },
 };
 
-export const content = { en, de };
+import { en as enPages, de as dePages } from "./content.pages";
+
+const merge = (base, extra) => ({ ...base, ...extra, legal: { ...base.legal, ...extra.legal } });
+
+export const content = { en: merge(en, enPages), de: merge(de, dePages) };

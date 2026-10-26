@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useRef, useCallback } from "react";
 import { content } from "./content";
-import { track, BOOKING_VALUE } from "./analytics";
+import { track, getSource, BOOKING_VALUE } from "./analytics";
 import { OPEN_CONSENT_EVENT } from "./ConsentBanner";
 
 /* ─── palette & tokens ─── */
@@ -170,7 +170,7 @@ const CalEmbed = ({ loadingText }) => {
       elementOrSelector: "#cal-inline-embed",
       calLink: "nomadkuche/manty-workshop",
       layout: "month_view",
-      config: { layout: "month_view" },
+      config: { layout: "month_view", source: getSource() },
     });
     window.Cal.ns["manty-workshop"]("ui", {
       hideEventTypeDetails: false,
@@ -611,7 +611,7 @@ export default function NomadKuche({ lang = "en" }) {
           </FadeIn>
 
           <FadeIn delay={0.2} style={{ textAlign: "center", marginTop: 24 }}>
-            <a href="https://cal.com/nomadkuche/manty-workshop" target="_blank" rel="noopener" onClick={() => track("cal_fallback_click")} style={{
+            <a href="https://cal.com/nomadkuche/manty-workshop" target="_blank" rel="noopener" onClick={(e) => { e.currentTarget.href = `https://cal.com/nomadkuche/manty-workshop?source=${encodeURIComponent(getSource())}`; track("cal_fallback_click"); }} style={{
               fontFamily: "'Karla', sans-serif", fontSize: 13, color: T.warmGray, textDecoration: "none",
             }}>
               {t.reserve.troublePre}<span style={{ color: T.crimson, textDecoration: "underline", textUnderlineOffset: 3 }}>{t.reserve.troubleLink}</span>

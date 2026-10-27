@@ -49,7 +49,7 @@ const ReviewCard = ({ r, more, less }) => {
       {r.placeholder && <span style={{ alignSelf: "flex-start", marginBottom: 10, padding: "2px 10px", borderRadius: 20, background: "#E0A85C", color: T.dark, fontFamily: "'Karla', sans-serif", fontSize: 11, fontWeight: 700, letterSpacing: "0.1em" }}>PLACEHOLDER (dev only)</span>}
       <div aria-label={`${r.rating} / 5`} style={{ color: T.gold, letterSpacing: 2, fontSize: 16 }}>{"★".repeat(r.rating)}{"☆".repeat(5 - r.rating)}</div>
       <blockquote style={{
-        fontFamily: "'Karla', sans-serif", fontSize: 15, lineHeight: 1.7, color: T.textDark, margin: "12px 0 16px", flex: 1,
+        fontFamily: "'Karla', sans-serif", fontSize: 15, lineHeight: 1.7, color: T.textDark, margin: "12px 0 16px", flex: 1, whiteSpace: "pre-line",
         ...(long && !open ? { display: "-webkit-box", WebkitLineClamp: 6, WebkitBoxOrient: "vertical", overflow: "hidden" } : {}),
       }}>{r.text}</blockquote>
       {long && <button onClick={() => setOpen(!open)} style={{ alignSelf: "flex-start", background: "none", border: "none", cursor: "pointer", color: T.crimson, fontFamily: "'Karla', sans-serif", fontSize: 13, fontWeight: 600, padding: "8px 0", minHeight: 44 }}>{open ? less : more}</button>}

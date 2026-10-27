@@ -28,27 +28,85 @@ export function applyConsent(granted) {
   try { localStorage.setItem(CONSENT_KEY, value); } catch {}
 }
 
-/* Traffic source for bookings. Kept in memory only (no cookie/storage) and passed to the
-   Cal.com "source" booking question, so it needs no consent. */
-function readSource() {
-  if (typeof window === "undefined") return "";
-  const clean = (v) => String(v || "").trim().slice(0, 60);
-  try {
-    const q = new URLSearchParams(window.location.search);
-    const src = clean(q.get("utm_source"));
-    if (src) {
-      const medium = clean(q.get("utm_medium"));
-      return medium ? `${src} / ${medium}` : src;
+/* Traffic source for bookings, passed to the Cal.com "source" booking question.
+   Format "<source> / <medium>", e.g. "instagram / social", "tiktok / referral", "instagram / in-app".
+   Priority:
+     1. utm_source (+ utm_medium), normalised ("IG" -> "instagram")
+     2. external referrer, mapped to a friendly name (l.instagram.com -> "instagram")
+     3. in-app browser (Instagram / TikTok / Facebook strip the referrer, but name themselves in the user agent)
+     4. the source stored earlier in this session (the site has several pages, so the landing
+        source must survive Home -> workshop navigation)
+     5. "direct"
+   Always kept in sessionStorage for the browser session (cleared when the tab closes), whatever the cookie choice. */
+
+const SOURCE_KEY = "nk_source";
+
+const UTM_ALIASES = { ig: "instagram", insta: "instagram", tt: "tiktok", fb: "facebook", yt: "youtube", wa: "whatsapp", li: "linkedin" };
+
+// [name, referrer-host pattern]
+const REFERRERS = [
+  ["instagram", /(^|\.)instagram\.com$/],
+  ["tiktok", /(^|\.)tiktok\.com$/],
+  ["facebook", /(^|\.)(facebook\.com|fb\.com|fb\.me)$/],
+  ["whatsapp", /(^|\.)(whatsapp\.com|wa\.me)$/],
+  ["youtube", /(^|\.)(youtube\.com|youtu\.be)$/],
+  ["linkedin", /(^|\.)(linkedin\.com|lnkd\.in)$/],
+  ["pinterest", /(^|\.)pinterest\.[a-z.]+$/],
+  ["twitter", /(^|\.)(twitter\.com|x\.com|t\.co)$/],
+  ["reddit", /(^|\.)reddit\.com$/],
+  ["google", /(^|\.)google\.[a-z.]+$/],
+  ["bing", /(^|\.)bing\.com$/],
+  ["duckduckgo", /(^|\.)duckduckgo\.com$/],
+];
+
+// In-app browsers, by user agent
+const IN_APP = [
+  ["instagram", /Instagram/i],
+  ["tiktok", /musical_ly|BytedanceWebview|TikTok|trill/i],
+  ["facebook", /FBAN|FBAV|FB_IAB/i],
+];
+
+const clean = (v) => String(v || "").trim().toLowerCase().slice(0, 60);
+
+function detectSource() {
+  const q = new URLSearchParams(window.location.search);
+
+  const utm = clean(q.get("utm_source"));
+  if (utm) {
+    const medium = clean(q.get("utm_medium"));
+    const name = UTM_ALIASES[utm] || utm;
+    return medium ? `${name} / ${medium}` : name;
+  }
+
+  if (document.referrer) {
+    let host = "";
+    try { host = new URL(document.referrer).hostname.toLowerCase().replace(/^www\./, ""); } catch {}
+    const own = window.location.hostname.toLowerCase().replace(/^www\./, "");
+    if (host && host !== own) {
+      const known = REFERRERS.find(([, re]) => re.test(host));
+      return `${known ? known[0] : clean(host)} / referral`;
     }
-    if (document.referrer) {
-      const host = new URL(document.referrer).hostname.replace(/^www\./, "");
-      if (host && host !== window.location.hostname.replace(/^www\./, "")) return clean(host);
-    }
-  } catch {}
-  return "direct";
+  }
+
+  const ua = navigator.userAgent || "";
+  const app = IN_APP.find(([, re]) => re.test(ua));
+  if (app) return `${app[0]} / in-app`;
+
+  return null; // nothing new on this page view
 }
 
-// Evaluated once at page load so the landing referrer/UTMs are not lost on later navigation.
+function readSource() {
+  if (typeof window === "undefined") return "";
+  let found = null;
+  try { found = detectSource(); } catch {}
+  let kept = null;
+  try { kept = sessionStorage.getItem(SOURCE_KEY); } catch {}
+  const source = found || kept || "direct";
+  if (found) { try { sessionStorage.setItem(SOURCE_KEY, found); } catch {} }
+  return source;
+}
+
+// Evaluated once per page load so the landing referrer/UTMs are not lost to later scrolling/SPA changes.
 const landingSource = readSource();
 export const getSource = () => landingSource;
 

@@ -133,3 +133,13 @@ Update the `og:image` URL in `index.html` to match your domain.
 ## License
 
 © 2025 Nomad Küche. All rights reserved.
+
+## Content & config (Next.js version)
+
+- `src/config.js` – form endpoints (Formspree-compatible), voucher minimum, Cal.com event slugs.
+  While an endpoint is empty the forms fall back to `mailto:` and fire no conversion event.
+- `src/reviews.js` – Google reviews and rating. The reviews section is hidden while `reviews` is empty.
+- `src/content.js`, `src/content.pages.js` – all EN/DE copy (Impressum, Datenschutz, pages).
+- Pages and routes live in `src/pages.js`; page bodies in `src/views/`.
+- Thank-you pages (`/thank-you/`, `/de/danke/`) are `noindex` and excluded from `sitemap.js`.
+  Do not block them in `robots.txt`. They fire no events; conversions fire in the form/booking handlers.

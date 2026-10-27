@@ -51,3 +51,20 @@ function readSource() {
 // Evaluated once at page load so the landing referrer/UTMs are not lost on later navigation.
 const landingSource = readSource();
 export const getSource = () => landingSource;
+
+/* Conversion helpers (nomadkuche-developer-spec.md, phase 2).
+   Pushes the spec event name and the legacy GTM-spec event, so existing triggers keep working.
+   Mark only one of each pair as a GA4 key event to avoid double counting. */
+export function trackConversion(event, legacy, params = {}) {
+  track(event, params);
+  if (legacy) track(legacy, params);
+}
+
+/* Fire a conversion, then navigate once GTM has processed it (or after a short timeout). */
+export function trackThenGo(event, legacy, params, url) {
+  let gone = false;
+  const go = () => { if (!gone) { gone = true; window.location.assign(url); } };
+  track(event, { ...params, eventCallback: go, eventTimeout: 800 });
+  if (legacy) track(legacy, params);
+  setTimeout(go, 900);
+}

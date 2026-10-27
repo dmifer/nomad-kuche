@@ -9,8 +9,7 @@ import { SpiralSun, KusKanat, PetroSpiral, LeafBranch, StarBurst, TileMedallion,
 import { sectionPad, sectionPadWide, headingStyle, subStyle, eyebrow, btnPrimary, btnOutline, asLink } from "../styles";
 import { MAPS_REVIEWS_URL, OWNER_EMAIL, WHATSAPP_NUMBER, WHATSAPP_URL } from "../config";
 
-// TODO: replace the Lagman placeholder with a real photo (public/lagman_1.jpg) when available.
-const WORKSHOP_IMAGES = { manty: { src: "/gallery_4.jpg", w: 990, h: 1280 }, lagman: null };
+const WORKSHOP_IMAGES = { manty: { src: "/manty_card.jpg", w: 1200, h: 900 }, lagman: { src: "/lagman_card.jpg", w: 745, h: 559 } };
 
 export default function Home({ lang = "en" }) {
   const t = content[lang];
@@ -84,9 +83,9 @@ export default function Home({ lang = "en" }) {
                   <TLink href={PAGES[w.id][lang]} className="card-link" event="offer_cta_click" params={{ click_text: h.workshopsCta, offer_name: `workshop_${w.id}` }}>
                     <div className="card" style={{ background: "white", borderRadius: 10, overflow: "hidden", border: `1px solid ${T.ivoryDark}`, height: "100%", display: "flex", flexDirection: "column" }}>
                       {img ? (
-                        <img src={img.src} alt="" width={img.w} height={img.h} loading="lazy" decoding="async" style={{ width: "100%", height: "auto", aspectRatio: "16/10", objectFit: "cover", display: "block" }} />
+                        <img src={img.src} alt="" width={img.w} height={img.h} loading="lazy" decoding="async" style={{ width: "100%", height: "auto", aspectRatio: "4/3", objectFit: "cover", display: "block" }} />
                       ) : (
-                        <ImgPlaceholder aspect="16/10" borderRadius={0} label={t.workshop.photoSoon} />
+                        <ImgPlaceholder aspect="4/3" borderRadius={0} label={t.workshop.photoSoon} />
                       )}
                       <div style={{ padding: "28px 28px 32px", display: "flex", flexDirection: "column", flex: 1 }}>
                         <span style={{ fontFamily: "'Karla', sans-serif", fontSize: 11, fontWeight: 600, color: T.crimson, letterSpacing: "0.12em", textTransform: "uppercase", background: `${T.crimson}0D`, padding: "4px 12px", borderRadius: 20, alignSelf: "flex-start" }}>{h.facts}</span>
@@ -102,9 +101,8 @@ export default function Home({ lang = "en" }) {
             <FadeIn delay={t.workshop.items.length * 0.12} style={{ height: "100%" }}>
               <TLink href={PAGES.gift[lang]} className="card-link" event="offer_cta_click" params={{ click_text: h.gift.cta, offer_name: "gift_voucher" }}>
                 <div className="card" style={{ background: "white", borderRadius: 10, overflow: "hidden", border: `1px solid ${T.ivoryDark}`, height: "100%", display: "flex", flexDirection: "column" }}>
-                  <div style={{ aspectRatio: "16/10", background: `linear-gradient(135deg, ${T.crimson}, ${T.darkMid})`, display: "flex", alignItems: "center", justifyContent: "center" }}>
-                    <StarBurst size={96} opacity={0.5} color={T.ivory} />
-                  </div>
+                  {/* Voucher artwork is shown whole (contain) on its own background colour */}
+                  <img src="/voucher_card.jpg" alt="" width={1200} height={849} loading="lazy" decoding="async" style={{ width: "100%", height: "auto", aspectRatio: "4/3", objectFit: "contain", background: "#802520", display: "block" }} />
                   <div style={{ padding: "28px 28px 32px", display: "flex", flexDirection: "column", flex: 1 }}>
                     <span style={{ fontFamily: "'Karla', sans-serif", fontSize: 11, fontWeight: 600, color: T.crimson, letterSpacing: "0.12em", textTransform: "uppercase", background: `${T.crimson}0D`, padding: "4px 12px", borderRadius: 20, alignSelf: "flex-start" }}>{h.gift.tag}</span>
                     <h3 style={{ fontFamily: "'EB Garamond', serif", fontSize: 26, fontWeight: 500, color: T.textDark, margin: "18px 0 10px" }}>{h.gift.title}</h3>

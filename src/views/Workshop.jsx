@@ -11,14 +11,13 @@ import { track, getSource } from "../analytics";
 import { StarBurst, PetroSpiral, Divider, ImgPlaceholder } from "../ornaments";
 import { sectionPad, sectionPadWide, headingStyle, subStyle, eyebrow, btnPrimary, asLink } from "../styles";
 
-// TODO: add a real Lagman photo set (public/lagman_*.jpg) and replace the placeholder.
 const PHOTOS = {
   manty: [
     { src: "/gallery_1.jpg", w: 960, h: 1280, alt: 0 },
     { src: "/gallery_3.jpg", w: 960, h: 1280, alt: 2 },
     { src: "/gallery_4.jpg", w: 990, h: 1280, alt: 3 },
   ],
-  lagman: [],
+  lagman: [{ src: "/lagman_1.jpg", w: 745, h: 881, alt: "item" }],
 };
 
 export default function Workshop({ lang = "en", id }) {
@@ -53,12 +52,14 @@ export default function Workshop({ lang = "en", id }) {
       {/* ─── PHOTOS ─── */}
       <section style={{ background: T.dark }}>
         <div style={{ maxWidth: 1100, margin: "0 auto", padding: "0 24px 72px" }}>
-          {photos.length ? (
+          {photos.length > 1 ? (
             <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(240px, 1fr))", gap: 16 }}>
               {photos.map((p) => (
                 <img key={p.src} src={p.src} alt={t.gallery.alts[p.alt]} width={p.w} height={p.h} loading="lazy" decoding="async" style={{ width: "100%", height: "auto", aspectRatio: "4/3", objectFit: "cover", borderRadius: 10, display: "block" }} />
               ))}
             </div>
+          ) : photos.length === 1 ? (
+            <img src={photos[0].src} alt={photos[0].alt === "item" ? w.photoAlt : t.gallery.alts[photos[0].alt]} width={photos[0].w} height={photos[0].h} decoding="async" style={{ display: "block", margin: "0 auto", width: "100%", maxWidth: 520, height: "auto", borderRadius: 10 }} />
           ) : (
             <ImgPlaceholder aspect="16/7" borderRadius={10} gradient={`linear-gradient(135deg, ${T.darkMid}, ${T.warmGray})`} label={t.workshop.photoSoon} style={{ color: T.ivory }} />
           )}

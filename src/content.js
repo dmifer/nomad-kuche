@@ -79,6 +79,7 @@ export const en = {
         id: "lagman",
         tab: "Lagman",
         title: "The Lagman Workshop",
+        photoAlt: "Hand-pulled lagman noodles lifted on a fork above a bowl of lagman with beef, peppers and fresh herbs",
         sub: "Hand-pulled noodles and a rich, savoury broth, from dough to shared bowl",
         steps: [
           { num: "01", title: "Welcome & Drinks", desc: "A warm welcome with tea, and a short story about lagman and its Uyghur roots." },
@@ -329,6 +330,7 @@ export const de = {
         id: "lagman",
         tab: "Lagman",
         title: "Der Lagman-Workshop",
+        photoAlt: "Handgezogene Lagman-Nudeln auf einer Gabel über einer Schüssel Lagman mit Rindfleisch, Paprika und frischen Kräutern",
         sub: "Handgezogene Nudeln und eine herzhafte Brühe – vom Teig bis zur gemeinsamen Schüssel",
         steps: [
           { num: "01", title: "Willkommen & Getränke", desc: "Herzlicher Empfang mit Tee und eine kurze Geschichte über Lagman und seine uigurischen Wurzeln." },

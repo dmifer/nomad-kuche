@@ -3,6 +3,7 @@
 import { useState, useEffect, useRef } from "react";
 import { T } from "./theme";
 import { WORKSHOPS } from "./config";
+import { btnOutline } from "./styles";
 import { track, trackConversion, getSource, BOOKING_VALUE } from "./analytics";
 
 /* ─── Cal.com Inline Embed ─── */
@@ -150,3 +151,58 @@ export const LazyMount = ({ children, minHeight = 400, rootMargin = "400px" }) =
   return on ? children : <div ref={ref} style={{ minHeight }} />;
 };
 
+
+
+/* "No suitable dates / want a discount" button that reveals a Brevo signup form on demand. */
+const BREVO_FORM_URL = "https://8ce25402.sibforms.com/v2/serve/MUIFAC_-ETXf-ixWjd0fAsO1yC8SkcS2wrpoTXH4KoBFcs0giObhbFgLOp5M6YGyN86ud6re-8gOsdk4pkuvHKHqSlRf7WmbRTs761pHDtZNsD-N7lt-0Pi1fKvZ_jJ4MFYgMQ5WdMMYA8zFRCorm66CG2UyFe6uxpkOtRiABO4mWFKpIcw_NW3zLqaQuT_xvNgN874ugPHh2PVFCw==";
+export const NoDatesForm = ({ label, closeLabel, workshopId }) => {
+  const [open, setOpen] = useState(false);
+  const [narrow, setNarrow] = useState(false);
+
+  useEffect(() => {
+    if (!open) return;
+    setNarrow(window.innerWidth < 560);
+    const onKey = (e) => { if (e.key === "Escape") setOpen(false); };
+    const prev = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    window.addEventListener("keydown", onKey);
+    return () => { window.removeEventListener("keydown", onKey); document.body.style.overflow = prev; };
+  }, [open]);
+
+  return (
+    <div style={{ textAlign: "center", marginTop: 20 }}>
+      <button
+        type="button"
+        aria-haspopup="dialog"
+        onClick={() => { track("no_dates_click", { workshop: workshopId }); setOpen(true); }}
+        style={{ ...btnOutline(T.crimson), padding: "12px 24px" }}
+      >
+        {label}
+      </button>
+      {open && (
+        <div
+          onClick={() => setOpen(false)}
+          style={{ position: "fixed", inset: 0, zIndex: 1000, background: "rgba(0,0,0,0.6)", display: "flex", alignItems: "center", justifyContent: "center", padding: 16 }}
+        >
+          <div
+            role="dialog" aria-modal="true" aria-label={label}
+            onClick={(e) => e.stopPropagation()}
+            style={{ position: "relative", background: "#1A1410", borderRadius: 12, padding: "40px 16px 16px", width: "100%", maxWidth: 572, maxHeight: "100%", overflow: "auto", boxShadow: "0 20px 60px rgba(0,0,0,0.3)" }}
+          >
+            <button
+              type="button" aria-label={closeLabel} onClick={() => setOpen(false)}
+              style={{ position: "absolute", top: 6, right: 6, width: 44, height: 44, border: "none", background: "transparent", fontSize: 28, lineHeight: 1, color: T.warmGray, cursor: "pointer" }}
+            >×</button>
+            <iframe
+              title={label}
+              width="540" height={narrow ? 620 : 420}
+              src={BREVO_FORM_URL}
+              frameBorder="0" scrolling="no" allowFullScreen
+              style={{ display: "block", marginLeft: "auto", marginRight: "auto", maxWidth: "100%" }}
+            />
+          </div>
+        </div>
+      )}
+    </div>
+  );
+};

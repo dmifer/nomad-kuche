@@ -6,7 +6,7 @@ import { WORKSHOPS } from "../config";
 import { T } from "../theme";
 import Layout from "../Layout";
 import { FadeIn, ReviewsSection } from "../ui";
-import { CalEmbed, LazyMount } from "../CalEmbed";
+import { CalEmbed, LazyMount, NoDatesForm } from "../CalEmbed";
 import { track, getSource } from "../analytics";
 import { StarBurst, PetroSpiral, Divider, ImgPlaceholder } from "../ornaments";
 import { sectionPad, sectionPadWide, headingStyle, subStyle, eyebrow, btnPrimary, asLink } from "../styles";
@@ -108,6 +108,8 @@ export default function Workshop({ lang = "en", id }) {
               <CalEmbed workshopId={id} loadingText={t.reserve.loading} unavailableText={t.reserve.unavailable} />
             </LazyMount>
           </FadeIn>
+
+          <NoDatesForm workshopId={id} label={t.reserve.noDates} closeLabel={t.reserve.noDatesClose} />
 
           <div style={{ textAlign: "center", marginTop: 24 }}>
             <a href={`https://cal.com/nomadkuche/${slug}`} target="_blank" rel="noopener" onClick={(e) => { e.currentTarget.href = `https://cal.com/nomadkuche/${slug}?source=${encodeURIComponent(getSource())}`; track("cal_fallback_click"); }} style={{ display: "inline-block", padding: "12px 8px", fontFamily: "'Karla', sans-serif", fontSize: 13, color: T.warmGray, textDecoration: "none" }}>

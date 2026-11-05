@@ -110,6 +110,8 @@ export const en = {
     troubleLink: "Book directly on Cal.com",
     loading: "Loading booking calendar…",
     unavailable: "Booking calendar is not available right now.",
+    noDates: "No suitable dates? Want a discount?",
+    noDatesClose: "Close",
   },
 
   gallery: {
@@ -361,6 +363,8 @@ export const de = {
     troubleLink: "Direkt auf Cal.com buchen",
     loading: "Buchungskalender wird geladen…",
     unavailable: "Der Buchungskalender ist derzeit nicht verfügbar.",
+    noDates: "Keine passenden Termine? Du möchtest einen Rabatt?",
+    noDatesClose: "Schließen",
   },
 
   gallery: {
